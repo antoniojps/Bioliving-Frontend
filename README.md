@@ -1,6 +1,6 @@
-# lab-bioliving
+# Bioliving Front End
 
-> Gestor de eventos para bioliving
+> Gestor de eventos para a bioliving desenvolvido no ambito da cadeira de LabMM4
 
 ## Build Setup
 
