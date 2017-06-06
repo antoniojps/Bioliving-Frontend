@@ -1,0 +1,82 @@
+.el-row {
+  float:none;
+  max-width:1136px;
+  width:100%;
+  margin:{
+    left:auto;
+    right:auto;
+  }
+  padding:{
+    left:$spacingLarge;
+    right:$spacingLarge;
+  }
+}
+
+.mobile {
+  display:flex;
+  @include screen(md){
+    display:none;
+  }
+}
+
+.desktop {
+  display:none;
+  @include screen(md){
+    display:flex;
+  }
+}
+
+.paddingLarge {
+  padding:$spacingLarge;
+}
+
+.paddingBase {
+  padding:$spacingBase;
+}
+
+.paddingFix{
+  padding:0;
+}
+
+.paddingVertLarge {
+  padding:{
+    top:$spacingLarge;
+    bottom:$spacingLarge;
+  }
+}
+
+.paddingVertBase {
+  padding:{
+    top:$spacingBase;
+    bottom:$spacingBase;
+  }
+}
+
+.paddingBottom {
+  padding:{
+    bottom:$spacingBase;
+  }
+}
+
+
+
+.floatLeft {
+  float:left;
+}
+
+.floatRight {
+  float:right;
+}
+
+.containerSpacing {
+  margin: {
+    top:$spacingBase;
+    bottom:$spacingBase;
+  }
+}
+.containerSpacingLg {
+  margin: {
+    top:$spacingLarge;
+    bottom:$spacingLarge;
+  }
+}

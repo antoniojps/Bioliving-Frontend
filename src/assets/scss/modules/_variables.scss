@@ -1,0 +1,61 @@
+/*
+  Definições gerais website bioliving
+  Autor: António Santos
+ */
+
+// Font family
+$font: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+
+// Cores
+
+$colorBg: #fff;
+
+// escuro ao claro
+$colorBase: #1F2D3D;
+$colorBase2: #475669;
+$colorBase3: #5E6D82;
+$colorBase4: #8492A6;
+$colorBase5: #99A9BF;
+$colorBase6: #C0CCDA;
+$colorBase7: #E5E9F2;
+
+$colorVerde: #B3C14E;
+$colorVerde2: #C5D45A;
+$colorAzul: #20A0FF;
+$colorAmarelo: #F7BA2A;
+$colorVermelho: #FF4949;
+
+// Tamanhos
+$sizeMedium: 1rem; // 16px
+$sizeSmall: $sizeMedium*.75; // 12px
+$sizeBase: $sizeMedium*0.875; // 14px
+$sizeLarge: $sizeMedium*1.25; // 20px
+$sizeXLarge: $sizeMedium*1.5; // 24px
+$sizeXXLarge: $sizeMedium*2; // 32px
+
+$borderSize: 1px;
+
+
+// Size
+$spacingXSmall: $sizeMedium * .25; // 4px
+$spacingSmall: $sizeMedium* .5; // 8px
+$spacingBase: $sizeMedium * .75; // 12px
+$spacingAverage: $sizeMedium * .8; // 20px
+$spacingLarge: $sizeMedium*1.5; // 24px
+$minWidth: 315px;
+
+// Weight
+$regular: 400;
+$bold: 800;
+
+// Breakpoints
+$breakpoints: (
+  xs:0,
+  sm: 576px,
+  md: 768px,
+  lg: 993px,
+  xl: 1920px
+);
+
+// Other
+$radius: 4px;

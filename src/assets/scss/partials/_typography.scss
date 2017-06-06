@@ -1,0 +1,93 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,800');
+
+body,html{
+  font-family: $font;
+}
+p {
+  font-size: $sizeBase;
+  line-height: $sizeXLarge;
+  color:$colorBase2;
+  padding:{
+    bottom: $spacingBase;
+  }
+}
+
+h1,h2,h3,h4 {
+  font-weight:$bold;
+  color:$colorBase;
+}
+
+h1 {
+  font-size:$sizeXLarge;
+  padding:{
+    bottom: $spacingLarge;
+  }
+}
+
+h2{
+  font-size:$sizeLarge;
+  padding:{
+    bottom: $spacingBase;
+  }
+
+}
+
+h3 {
+  font-size: $sizeMedium;
+  padding:{
+    bottom: $spacingSmall;
+  }
+}
+
+h4 {
+  font-size: $sizeBase;
+}
+
+.highlight {
+  color: $colorVerde;
+}
+
+.bold {
+  font-weight:$bold;
+}
+
+.regular {
+  font-weight:$regular;
+}
+
+.size-xl {
+  font-size:$sizeXLarge;
+}
+
+.size-lg{
+  font-size:$sizeLarge;
+}
+
+.size-md{
+  font-size:$sizeMedium;
+}
+
+.size-sm{
+  font-size:$sizeSmall;
+}
+
+.align-right {
+  text-align:right;
+}
+
+.align-left {
+  text-align:left;
+}
+
+.align-center {
+  text-align:left;
+}
+
+.faded {
+  color:$colorBase4;
+}
+
+.grey {
+  color:$colorBase2;
+}

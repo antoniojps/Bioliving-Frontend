@@ -1,0 +1,47 @@
+/*[
+  {
+    "id_eventos": "2",
+    "nome_evento": "Passeio Botanico",
+    "data_registo_evento": "2017-06-02 06:41:25",
+    "data_evento": "2017-06-05 00:00:00",
+    "descricao_short": "Passeio Botanico \u00e0 Pateira de Frossos com a Dra. Rosa Pinho, bot\u00e2nica e curadora do herb\u00e1rio do Departamento de Biologia da Universidade de Aveiro.",
+    "descricao": "Agora que a Primavera fez florescer tantas plantas, venha conhecer a diversidade bot\u00e2nica da Pateira de Frossos, na companhia de uma bot\u00e2nica de renome. Qual o nome de cada planta? Quais se podem comer? Que propriedade medicinal t\u00eam? Deixe-se maravilhar pelo fascinante mundo das plantas.",
+    "max_participantes": null,
+    "min_participantes": null,
+    "idade_minima": null,
+    "data_fim": null,
+    "fotos": "http:/i.imgur.com/RQrr9Jj.jpg",
+    "ativo": "1",
+    "localizacao_localizacao": "1",
+    "tipo_evento_id_tipo_evento": "1"
+  }
+]*/
+
+[
+  {
+    "id_eventos": "2",
+    "nome_evento": "Passeio Botanico",
+    "data_registo_evento": "2017-06-02 06:41:25",
+    "data_evento": "2017-06-03 00:00:00",
+    "descricao_short": "Passeio Botanico \u00e0 Pateira de Frossos com a Dra. Rosa Pinho, bot\u00e2nica e curadora do herb\u00e1rio do Departamento de Biologia da Universidade de Aveiro.",
+    "descricao": "Agora que a Primavera fez florescer tantas plantas, venha conhecer a diversidade bot\u00e2nica da Pateira de Frossos, na companhia de uma bot\u00e2nica de renome. Qual o nome de cada planta? Quais se podem comer? Que propriedade medicinal t\u00eam? Deixe-se maravilhar pelo fascinante mundo das plantas.",
+    "max_participantes": null,
+    "min_participantes": null,
+    "idade_minima": null,
+    "data_fim": "2017-06-05 15:00:00",
+    "fotos": "http:/i.imgur.com/RQrr9Jj.jpg",
+    "ativo": "0",
+    "localizacao_localizacao": "1",
+    "tipo_evento_id_tipo_evento": "1",
+    "localizacao": "1",
+    "lat": "40.640999",
+    "lng": "-8.642626",
+    "nome": "pateoas",
+    "eventos_id_eventos": "2",
+    "utilizadores_id_utilizadores": "14",
+    "data_inscricao": "2017-06-03 15:53:58",
+    "id_tipo_evento": "1",
+    "nome_tipo_evento": "adsa",
+    "participantes": "1"
+  }
+]

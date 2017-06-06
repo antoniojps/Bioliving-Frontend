@@ -1,0 +1,38 @@
+.el-button--primary {
+  color: #fff;
+  background-color: $colorVerde;
+  border-color: $colorVerde;
+
+  &:hover{
+    background: lighten($colorVerde,1%);
+    background-color: $colorVerde2;
+    border-color: $colorVerde;
+  }
+
+  &:active{
+    background-color: lighten($colorVerde2,10%);
+    border-color: $colorVerde;
+  }
+
+  &:focus {
+    background-color: $colorVerde;
+    border-color: $colorVerde;
+  }
+  &:visited{
+    background-color: $colorVerde2;
+    border-color: $colorVerde;
+  }
+}
+
+.el-row {
+  padding:0;
+  margin:0;
+}
+
+.el-button--text {
+  border: none;
+  color: $colorVerde;
+  background: 0 0;
+  padding-left: 0;
+  padding-right: 0;
+}

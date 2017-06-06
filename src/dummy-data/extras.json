@@ -1,0 +1,16 @@
+[
+  {
+    "titulo": "Oferta de lanche",
+    "descricao": "Oferta de lanchinho descricao",
+    "descricao_classe": "fa-star",
+    "descricao_pequena": null,
+    "descricao_pequena_classe": null
+  },
+  {
+    "titulo": "Oferta de tshirts",
+    "descricao": "A melhor bioliving SWAG e ir ao cu do Henrique",
+    "descricao_classe": "fa-info",
+    "descricao_pequena": "ele gosta",
+    "descricao_pequena_classe": "fa-life-ring"
+  }
+]
