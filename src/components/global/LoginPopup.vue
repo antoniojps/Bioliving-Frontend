@@ -6,6 +6,7 @@
     :before-close="handleClose">
         <span slot="footer" class="dialog-footer">
 
+    <!-- TODO melhorar responsive dos botoes em mobile -->
           <!-- login form -->
          <el-form :model="formLogin" label-position="top" v-if="dialogTypeProp==='Entrar'">
     <el-form-item label="Utilizador (email ou username)" :label-width="formLabelWidth">
@@ -77,7 +78,7 @@
       handleClose() {
         this.$emit('dialogClose');
       },
-      // todo vue-resource send authorization request e obter JWT
+      // todo vue-resource send authorization request, obter JWT, verificar JWT e guardar na localstorage
       loginHandler(){
         if(this.dialogTypeProp === 'Entrar'){
           // LOGIN HANDLER
@@ -92,6 +93,7 @@
             this.loggingIn = false;
           },1000)
         }
+        // todo vue-resource para registrar, obter JWT, verificar JWT e guardar na localstorage
         else if(this.dialogTypeProp === 'Inscrever'){
           // LOGIN HANDLER
           // Enviar INSERT e Authorization request

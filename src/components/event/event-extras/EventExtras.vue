@@ -22,7 +22,7 @@
 
   export default {
 
-    // TODO : Obter os extras atraves de AJAX
+    // TODO : Vue-resource para obter info ou prop
 
     components: {
       'event-extra': EventExtra

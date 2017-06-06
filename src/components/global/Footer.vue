@@ -14,6 +14,10 @@
 </template>
 
 <script>
+
+  // TODO : Vue-resource para obter os dados
+
+
   export default {
     data(){
       return {

@@ -11,6 +11,8 @@
 </template>
 
 <script>
+  // TODO : Vue-resource para dados ao input e criar componente EventSearchFilters (search com filtros)
+
   export default {
     data() {
       return {

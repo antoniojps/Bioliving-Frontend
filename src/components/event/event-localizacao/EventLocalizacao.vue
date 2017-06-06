@@ -16,6 +16,8 @@
 
 <script>
 
+  // TODO : Vue-resource para obter coordenadas ou prop
+
   export default {
     data(){
       return {

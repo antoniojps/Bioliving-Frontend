@@ -4,6 +4,15 @@ import Login from './containers/Login.vue';
 import Register from './containers/Register.vue';
 import PageNotFound from './containers/PageNotFound.vue';
 
+
+/* TODO: Adicionar e criar outras routes
+* $conta
+* $conta/pontos
+* $conta/eventos
+* $conta/eventos/:id
+* admin
+* ...
+* */
 export const routes = [
   {path: '/', component: Home},
   {path: '/evento', component: Home},

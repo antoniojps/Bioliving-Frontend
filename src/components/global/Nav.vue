@@ -1,4 +1,7 @@
 <template>
+
+  <!-- TODO: Versao da nav com login efetuado -->
+
   <div class="nav">
     <div class="nav__brand" @click="redirectHome">
       <div class="nav__brand--logo"></div>

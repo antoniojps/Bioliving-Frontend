@@ -8,9 +8,8 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 
 
-// Dependencies
+// Dependencies vendor
 Vue.use(ElementUi,{locale});
-
 Vue.use(VueProgressBar, {
   color: 'rgb(255,255,255)',
   failedColor: 'black',

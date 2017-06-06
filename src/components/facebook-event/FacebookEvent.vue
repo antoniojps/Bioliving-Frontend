@@ -19,6 +19,10 @@
 
 <script>
 export default {
+
+  // TODO : Vue-resource para dados ou prop
+
+
   data(){
     return {
       mouseOver : false,
