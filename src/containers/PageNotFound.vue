@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row :gutter="24" style="margin-left:auto;margin-right:auto;">
-      <h1>404</h1>
+      <h1>Em desenvolvimento...</h1>
     </el-row>
   </div>
 </template>

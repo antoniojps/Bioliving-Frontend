@@ -1,0 +1,64 @@
+{
+  "forms": [
+    {
+      "name": "form",
+      "items": [
+        {
+          "name": "name",
+          "label": "Activity name",
+          "type": "input",
+          "placeholder": "",
+          "value": ""
+        },
+        {
+          "name": "region",
+          "label": "Activity zone",
+          "type": "select",
+          "options": [
+            {
+              "label": "Zone one",
+              "value": "Anadia"
+            },
+            {
+              "label": "Zone two",
+              "value": "Aveiro"
+            }
+          ]
+        },
+        {
+          "name": "date",
+          "label": "Activity time",
+          "type": "date-picker",
+          "placeholder": "Pick a date",
+          "value": ""
+        },
+        {
+          "name": "type",
+          "label": "Activity type",
+          "type": "checkbox",
+          "options": [
+            {
+              "label": "Online activities"
+            },
+            {
+              "label": "Promotion activities"
+            }
+          ]
+        },
+        {
+          "name": "resource",
+          "label": "Resources",
+          "type": "radio",
+          "options": [
+            {
+              "label": "Sponsor"
+            },
+            {
+              "label": "Venue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

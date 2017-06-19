@@ -9,8 +9,8 @@
     <!-- TODO melhorar responsive dos botoes em mobile -->
           <!-- login form -->
          <el-form :model="formLogin" label-position="top" v-if="dialogTypeProp==='Entrar'">
-    <el-form-item label="Utilizador (email ou username)" :label-width="formLabelWidth">
-      <el-input v-model="formLogin.username" auto-complete="off"></el-input>
+    <el-form-item label="E-mail" :label-width="formLabelWidth">
+      <el-input v-model="formLogin.email" auto-complete="off"></el-input>
     </el-form-item>
            <el-form-item label="Password" :label-width="formLabelWidth">
       <el-input v-model="formLogin.password" auto-complete="off" type="password"></el-input>
@@ -20,7 +20,7 @@
 
           <!-- Register form -->
          <el-form :model="formRegister" label-position="top" v-if="dialogTypeProp==='Inscrever'">
-    <el-form-item label="Utilizador (email ou username)" :label-width="formLabelWidth">
+    <el-form-item label="E-mail" :label-width="formLabelWidth">
       <el-input v-model="formRegister.username" auto-complete="off"></el-input>
     </el-form-item>
            <el-form-item label="Password" :label-width="formLabelWidth">
@@ -32,12 +32,17 @@
     <el-button type="text" v-if="dialogTypeProp==='Entrar'" @click="dialogTypeProp='Inscrever'">Não tem conta? Inscreva-se</el-button>
     <el-button type="text" v-if="dialogTypeProp==='Inscrever'" @click="dialogTypeProp='Entrar'">Já tem conta? Entrar</el-button>
     <el-button @click="handleClose">Cancelar</el-button>
-    <el-button type="primary" @click="loginHandler" :loading="loggingIn">Entrar</el-button>
+    <el-button type="primary" @click="loginHandler" :loading="loggingIn">{{btnText}}</el-button>
   </span>
   </el-dialog>
 </template>
 
 <script>
+
+  import {mapMutations,mapGetters} from 'vuex';
+  import Autenticacao from './../../custom/autenticacao';
+
+
   export default {
     props: {
       dialogOpen: {
@@ -54,16 +59,14 @@
         dialogTypeProp : this.dialogType,
         dialogOpenProp: this.dialogOpen,
         formLogin: {
-          username: '',
+          email: '',
           password: ''
         },
         loggingIn: false,
         formRegister: {
           nome:'',
           apelido:'',
-          dataNascimento:'',
           email:'',
-          username: '',
           password: ''
         },
         formLabelWidth: '200px'
@@ -72,7 +75,13 @@
     computed: {
       dialogVisible(){
         return this.dialogOpen;
-      }
+      },
+      btnText(){
+        return this.dialogTypeProp==='Inscrever' ? 'Inscrever' : 'Entrar' ;
+      },
+      ...mapGetters([
+        'auth'
+      ])
     },
     methods: {
       handleClose() {
@@ -82,16 +91,25 @@
       loginHandler(){
         if(this.dialogTypeProp === 'Entrar'){
           // LOGIN HANDLER
-          // Enviar authorization request
-          // Guardar WST
-          // Mostrar componentes de loggado
-
+          console.log(this.auth);
           this.loggingIn = true;
           this.$Progress.start();
-          setTimeout(()=>{
+
+          // Enviar authorization request
+          this.$http.post('login',{email:this.formLogin.email,password:this.formLogin.password}).then(resposta => {
             this.$Progress.finish();
             this.loggingIn = false;
-          },1000)
+            Autenticacao.autenticar();
+            this.$emit('dialogClose');
+            return resposta.json();
+          }, resposta => {
+            this.$Progress.fail();
+            this.loggingIn = false;
+            return resposta.json();
+          }).then(data=>{
+            console.log(data);
+          })
+          // Vuex Mutation state de acordo com resposta
         }
         // todo vue-resource para registrar, obter JWT, verificar JWT e guardar na localstorage
         else if(this.dialogTypeProp === 'Inscrever'){
@@ -101,6 +119,7 @@
           // Mostrar componentes de loggado
         }
       }
+
     }
   }
 </script>

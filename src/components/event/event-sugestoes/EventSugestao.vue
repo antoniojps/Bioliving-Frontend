@@ -62,6 +62,9 @@
       top: $spacingLarge;
     }
 
+    border-radius:$radius;
+
+
     @include screen(sm) {
       top: 0;
     }
@@ -85,7 +88,6 @@
         size:cover;
         position:center;
       }
-      border-radius:$radius;
     }
     &__info{
 

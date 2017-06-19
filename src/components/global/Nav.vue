@@ -23,7 +23,9 @@
       <div class="nav__right--links">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="Eventos da Bioliving" name="/"></el-tab-pane>
-          <el-tab-pane label="Entrar" name="/login"></el-tab-pane>
+          <el-tab-pane label="Entrar" name="/login" v-if="!auth"></el-tab-pane>
+          <el-tab-pane label="Sair" name="/logout" v-if="auth"></el-tab-pane>
+          <el-tab-pane label="Normal" name="" v-if="scope('normal')"></el-tab-pane>
         </el-tabs>
       </div>
     </div>
@@ -32,13 +34,21 @@
       :dialogOpen="dialogVisible"
       :dialogType="dialogType"
       @dialogClose="dialogClosed">
-
     </app-login-popup>
 
   </div>
 </template>
 
 <script>
+
+  // Helpers Vuex
+  import {mapGetters} from 'vuex';
+
+  // Autenticacao Helpers
+  import Autenticacao from './../../custom/autenticacao';
+
+
+  //Componentes
   import EventSearch from '../event-search/EventSearch.vue';
   import LoginPopup from '../global/LoginPopup.vue';
 
@@ -55,6 +65,12 @@
       };
     },
     methods: {
+
+      scope(scope){
+        return Autenticacao.validarScopes(scope);
+      },
+
+
       // quando clicam numa lista do menu mudar route para essa
       handleClick(action) {
           if (this.activeName === '/') {
@@ -63,10 +79,8 @@
           else if(this.activeName==='/login'){
             this.dialogType ='Entrar';
             this.dialogVisible = true;
-          } else {
-            this.dialogType = 'Inscrever';
-            this.dialogVisible = true;
-
+          } else if(this.activeName === '/logout'){
+            this.logout();
           }
       },
       redirectHome(){
@@ -77,9 +91,18 @@
       dialogClosed(){
         this.dialogVisible = !this.dialogVisible;
         this.activeName = this.$route.path;
+      },
+
+      // Login feito
+      logout(){
+        this.$Progress.start();
+        this.$http.delete('login').then((response) => {
+          Autenticacao.autenticar();
+          this.$Progress.finish();
+        })
       }
     },
-    created(){
+    beforeUpdate(){
       // definir menu activo antes de criar montar (Ver Vue Lifecycle)
       this.activeName = this.$route.path;
     },
@@ -88,6 +111,12 @@
       '$route'(to, from) {
         this.activeName = this.$route.path;
       }
+    },
+    computed: {
+      // spread operator
+      ...mapGetters([
+        'auth'
+      ])
     }
 
   }

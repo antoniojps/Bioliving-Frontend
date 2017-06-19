@@ -6,7 +6,7 @@
       <h1>{{evento.nome_evento}}</h1>
       <p>
         {{id}} -
-        {{evento.descricao_short}}
+        {{evento.descricao_short}} -
       </p>
 
       <el-tabs v-model="activeSubNav" @tab-click="handleClickSubNav" class="subnav">
