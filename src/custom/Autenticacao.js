@@ -12,7 +12,7 @@ export default class Autenticacao {
     }, resposta => {
       // 401
       return false;
-    }).then(data=>{
+    }).then((data)=>{
       // Se user esta logado guardar informaçao na store, caso contrario guardar false
       data ? store.commit('login',data) : store.commit('logout');
       console.log('/me request:')
@@ -20,36 +20,5 @@ export default class Autenticacao {
       console.log('-----')
     })
   }
-
-  /*
-    Validar scopes
-    Exemplo:
-   import Autenticacao from './../../custom/autenticacao';
-
-
-   methods:{
-     scope(scope){
-     return Autenticacao.validarScopes(scope);
-     }
-    }
-
-    template:
-   <componente  v-if="scope('admin')"></componente> // So sera mostrado se tiver o scope normal
-
-   */
-
-  static validarScopes(permissao){
-
-    let scopeValido = false;
-
-    let scopes = store.getters.auth ? store.getters.auth.scope : ['publico'];
-    let scope = scopes.indexOf(permissao);
-    if(scope!==-1){
-      scopeValido = true;
-    }
-
-    return scopeValido;
-  }
-
 
 }

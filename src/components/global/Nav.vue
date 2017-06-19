@@ -23,9 +23,16 @@
       <div class="nav__right--links">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="Eventos da Bioliving" name="/"></el-tab-pane>
+
+          <el-tab-pane label="Admin" name="/admin" v-if="adminScope"></el-tab-pane>
+          <el-tab-pane label="Normal" name="" v-if="normalScope"></el-tab-pane>
+          <el-tab-pane label="Colaborador" name="" v-if="colaboradorScope"></el-tab-pane>
+          <el-tab-pane label="Socio" name="" v-if="socioScope"></el-tab-pane>
+
           <el-tab-pane label="Entrar" name="/login" v-if="!auth"></el-tab-pane>
           <el-tab-pane label="Sair" name="/logout" v-if="auth"></el-tab-pane>
-          <el-tab-pane label="Normal" name="" v-if="scope('normal')"></el-tab-pane>
+
+
         </el-tabs>
       </div>
     </div>
@@ -65,11 +72,6 @@
       };
     },
     methods: {
-
-      scope(scope){
-        return Autenticacao.validarScopes(scope);
-      },
-
 
       // quando clicam numa lista do menu mudar route para essa
       handleClick(action) {
@@ -115,7 +117,13 @@
     computed: {
       // spread operator
       ...mapGetters([
-        'auth'
+        'auth',
+        'idUtilizador',
+        'publicoScope',
+        'normalScope',
+        'socioScope',
+        'colaboradorScope',
+        'adminScope'
       ])
     }
 
