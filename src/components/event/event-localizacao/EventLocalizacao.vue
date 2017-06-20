@@ -2,7 +2,7 @@
   <div class="paddingBottom">
     <el-row style="padding-left:0; padding-right:0;" class="mapa">
 
-      <el-tooltip placement="top" class="mapa__info" :value="true" effect="dark">
+      <el-tooltip placement="top" class="mapa__info" :value="false" effect="dark">
         <div slot="content">
           <h3 style="color:white; text-align:center" class="align-center size-md paddingFix">Encontramo-nos aqui:</h3>
           <p style="color:white" class="align-right size-sm paddingFix">

@@ -21,26 +21,21 @@
         <app-event-search></app-event-search>
       </div>
       <div class="nav__right--links">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="nomeAtivo" @tab-click="handleClick">
           <el-tab-pane label="Eventos da Bioliving" name="/"></el-tab-pane>
-
-          <el-tab-pane label="Admin" name="/admin" v-if="adminScope"></el-tab-pane>
-          <el-tab-pane label="Normal" name="" v-if="normalScope"></el-tab-pane>
-          <el-tab-pane label="Colaborador" name="" v-if="colaboradorScope"></el-tab-pane>
-          <el-tab-pane label="Socio" name="" v-if="socioScope"></el-tab-pane>
-
-          <el-tab-pane label="Entrar" name="/login" v-if="!auth"></el-tab-pane>
-          <el-tab-pane label="Sair" name="/logout" v-if="auth"></el-tab-pane>
-
-
+          <el-tab-pane label="Entrar" name="login" v-if="!auth"></el-tab-pane>
+          <el-tab-pane label="Inscrever" name="inscrever" v-if="!auth"></el-tab-pane>
+          <el-tab-pane label="Sair" name="logout" v-if="auth"></el-tab-pane>
         </el-tabs>
       </div>
     </div>
 
     <app-login-popup
       :dialogOpen="dialogVisible"
-      :dialogType="dialogType"
-      @dialogClose="dialogClosed">
+      :dialogType="dialogTypeProp"
+      @dialogClose="dialogClosed"
+      @dialogChange="dialogChanged"
+    >
     </app-login-popup>
 
   </div>
@@ -57,7 +52,7 @@
 
   //Componentes
   import EventSearch from '../event-search/EventSearch.vue';
-  import LoginPopup from '../global/LoginPopup.vue';
+  import LoginPopup from '../global/LoginPopup/LoginPopup.vue';
 
   export default {
     components: {
@@ -66,47 +61,60 @@
     },
     data() {
       return {
-        activeName: this.$route.path,
         dialogVisible: false,
-        dialogType: 'Entrar'
+        dialogTypeProp: 'Entrar',
+        nomeAtivo: '/'
       };
     },
     methods: {
 
       // quando clicam numa lista do menu mudar route para essa
-      handleClick(action) {
-          if (this.activeName === '/') {
-            this.$router.push('/');
-          }
-          else if(this.activeName==='/login'){
-            this.dialogType ='Entrar';
-            this.dialogVisible = true;
-          } else if(this.activeName === '/logout'){
-            this.logout();
-          }
+      handleClick() {
+        if (this.nomeAtivo === '/') {
+          this.$router.push('/');
+        }
+        else if (this.nomeAtivo === 'login') {
+          this.dialogTypeProp = 'Entrar';
+          this.dialogVisible = true;
+        } else if (this.nomeAtivo === 'inscrever') {
+          this.dialogTypeProp = 'Inscrever';
+          this.dialogVisible = true;
+        } else if (this.nomeAtivo === 'logout') {
+           this.logout();
+        }
       },
       redirectHome(){
         // redirecionar para index e atualiar active no menu
         this.$router.push('/');
-        this.activeName = this.$route.path;
+        this.nomeAtivo = '/';
       },
+      // Eventos dialogClose e dialogChange
       dialogClosed(){
         this.dialogVisible = !this.dialogVisible;
-        this.activeName = this.$route.path;
+        this.nomeAtivo = '/';
       },
+      dialogChanged(dados){
+        this.dialogTypeProp = dados[0];
+        this.nomeAtivo = dados[1];
 
+      },
       // Login feito
       logout(){
         this.$Progress.start();
         this.$http.delete('login').then((response) => {
-          Autenticacao.autenticar();
+          return Autenticacao.autenticar();
+        }).then(response => {
           this.$Progress.finish();
+          this.$message({
+            message: 'Até à próxima!',
+            type: 'success'
+          });
         })
       }
     },
-    beforeUpdate(){
-      // definir menu activo antes de criar montar (Ver Vue Lifecycle)
-      this.activeName = this.$route.path;
+    mounted(){
+      // definir menu activo antes de montar (Ver Vue Lifecycle)
+      this.nomeAtivo = this.$route.path;
     },
 
     watch: {
