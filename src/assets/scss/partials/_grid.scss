@@ -63,6 +63,34 @@
   }
 }
 
+.marginVertLarge {
+  margin:{
+    top:$spacingLarge;
+    bottom:$spacingLarge;
+  }
+}
+
+.marginVertBase {
+  margin:{
+    top:$spacingBase;
+    bottom:$spacingBase;
+  }
+}
+
+.marginBottom {
+  margin:{
+    bottom:$spacingBase;
+  }
+}
+.marginBottomLarge {
+  margin:{
+    bottom:$spacingLarge;
+  }
+}
+
+.expandir {
+  width:100%;
+}
 
 
 .floatLeft {

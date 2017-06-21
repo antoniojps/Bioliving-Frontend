@@ -1,5 +1,7 @@
 <template>
   <div class="paddingBottom">
+    <h2>Localização</h2>
+
     <el-row style="padding-left:0; padding-right:0;" class="mapa">
 
       <el-tooltip placement="top" class="mapa__info" :value="false" effect="dark">

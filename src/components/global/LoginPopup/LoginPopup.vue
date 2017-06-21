@@ -195,9 +195,8 @@
     },
     methods: {
       handleAvatarSuccess(res, file) {
-        console.log(res.info.size);
         this.imageUploaded = true;
-        this.imageUrl = URL.createObjectURL(file.raw);
+        this.imageUrl = res.imagens.url;
 
       },
       beforeAvatarUpload(file) {
@@ -209,7 +208,7 @@
           this.$message.error('Foto de perfil tem de ter o formato PNG ou JPG');
         }
         if (!isLt2M) {
-          this.$message.error('Foto de perfil não pode exceder os 2MB!');
+          this.$message.error('Foto de perfil não pode exceder 1 MB de tamanho');
         }
 
         return (isJPG || isPNG ) && isLt2M;
