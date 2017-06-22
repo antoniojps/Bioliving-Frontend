@@ -2,6 +2,7 @@ import { routes } from './router'
 import ElementUi from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/pt';
 import VueProgressBar from 'vue-progressbar';
+import SocialSharing from 'vue-social-sharing';
 
 import Vue from 'vue'
 window.Vue = Vue
@@ -20,9 +21,10 @@ Vue.use(VueProgressBar, {
   failedColor: 'black',
   height: '2px'
 });
+Vue.use(SocialSharing);
 
 // Http
-Vue.http.options.root = 'http://localhost/learning-SLIM/public/api';
+Vue.http.options.root = 'http://slimapp/api';
 Vue.http.options.headers = 'Content-type: application/json';
 
 Vue.http.interceptors.push((request, next) => {
@@ -33,7 +35,6 @@ Vue.http.interceptors.push((request, next) => {
 
 // Routes
 Vue.use(VueRouter);
-
 const router = new VueRouter({
   routes
 })

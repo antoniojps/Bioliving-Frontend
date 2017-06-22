@@ -8,6 +8,8 @@ export default class Autenticacao {
   static autenticar(){
     Vue.http.get('me').then(resposta=>{
       // 200 -> login feito
+      store.commit('getFeito');
+      console.log('getFeito');
       return resposta.json()
     }, resposta => {
       // 401
@@ -15,9 +17,8 @@ export default class Autenticacao {
     }).then((data)=>{
       // Se user esta logado guardar informaçao na store, caso contrario guardar false
       data ? store.commit('login',data) : store.commit('logout');
-      console.log('/me request:')
-      console.log(store.getters.auth);
-      console.log('-----')
+      store.commit('getDesfeito');
+      console.log('getDesfeito');
     })
   }
 

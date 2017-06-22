@@ -24,11 +24,11 @@
 
     </el-col>
     <el-col :xs="24">
-      <event-sugestao v-for="evento in eventos"
+      <event-sugestao v-for="evento in eventos.data"
                       :idEvento="evento.id_eventos"
                       :nome="evento.nome_evento"
                       :dataEvento="evento.data_evento"
-                      :foto="evento.fotos.split(',')[0]"
+                      :foto="evento.fotos"
                       :key="evento.id_eventos">
       </event-sugestao>
     </el-col>
@@ -51,37 +51,61 @@
         inputSearch: '',
         dataInicio: '',
         dataFim: '',
-        eventos: [
-          {
-            "id_eventos": "2",
-            "nome_evento": "Passeio Botanico",
-            "data_evento": "2017-06-05 00:00:00",
-            "descricao_short": "Passeio Botanico \u00e0 Pateira de Frossos com a Dra. Rosa Pinho, bot\u00e2nica e curadora do herb\u00e1rio do Departamento de Biologia da Universidade de Aveiro.",
-            "fotos": "http://i.imgur.com/VWPWTXW.png"
-          },
-          {
-            "id_eventos": "3",
-            "nome_evento": "Lorem ipsum lorem",
-            "data_evento": "2017-06-05 00:00:00",
-            "descricao_short": "Lorem ipsum dolor sit amet, consectetur adipiscing elit\u2026",
-            "fotos": "http://i.imgur.com/wmOUbG4.png"
-          },
-          {
-            "id_eventos": "4",
-            "nome_evento": "Lorem ipsum ipsumipsum ipsum ipsum ipsum ipsum ipsumipsum",
-            "data_evento": "2017-06-05 00:00:00",
-            "descricao_short": "Lorem ipsum dolor sit amet, consectetur adipiscing elit\u2026",
-            "fotos": "http://i.imgur.com/kBk6DxY.png"
-          },
-          {
-            "id_eventos": "4",
-            "nome_evento": "Lorem ipsum",
-            "data_evento": "2017-06-05 00:00:00",
-            "descricao_short": "Lorem ipsum dolor sit amet, consectetur adipiscing elit\u2026",
-            "fotos": "http://i.imgur.com/EPPQu4t.png"
-          },
+        eventos: {
+          "status": "200",
+          "data": [
+            {
+              "id_eventos": "25",
+              "nome_evento": "BioLousada - FieldSketching",
+              "nome_tipo_evento": "Field Sketching",
+              "nome": "Lousada",
+              "data_evento": "2017-06-17 09:30:00",
+              "descricao_short": "Desenhar a natureza é uma outra forma de vê-la, de se conectar com ela. ",
+              "inscritos": "0",
+              "interessados": "0",
+              "fotos": "http://i.imgur.com/VWPWTXW.png"
 
-        ]
+            },
+            {
+              "id_eventos": "23",
+              "nome_evento": "Votação online Orçamento Participativo Albergaria-a-Velha",
+              "nome_tipo_evento": "Votação",
+              "nome": "Lousada",
+              "data_evento": "2017-06-20 00:00:00",
+              "descricao_short": "Durante o mês de Junho estão a votação 20 projetos para o Orçamento Participativo do Município de Albergaria-a-Velha, em http://op.cm-albergaria.pt/",
+              "inscritos": "1",
+              "interessados": "1",
+              "fotos": "http://i.imgur.com/wmOUbG4.png"
+            },
+            {
+              "id_eventos": "24",
+              "nome_evento": "LousadaBlitz",
+              "nome_tipo_evento": "Oficina",
+              "nome": "Lousada",
+              "data_evento": "2017-06-22 08:00:00",
+              "descricao_short": "Ser biólogo por um dia!",
+              "inscritos": "0",
+              "interessados": "0",
+              "fotos": "http://i.imgur.com/kBk6DxY.png"
+
+            },
+            {
+              "id_eventos": "22",
+              "nome_evento": "Passeio Botânico",
+              "nome_tipo_evento": "Passeio",
+              "nome": "Pateira de Frossos",
+              "data_evento": "2017-06-30 08:28:00",
+              "descricao_short": " Passeio Botanico à Pateira de Frossos com a Dra. Rosa Pinho, botânica e curadora do herbário do Departamento de Biologia da Universidade de Aveiro.",
+              "inscritos": "1",
+              "interessados": "1",
+              "fotos": "http://i.imgur.com/EPPQu4t.png"
+
+            },
+            {
+              "info": "final dos resultados"
+            }
+          ]
+        }
       }
     },
 

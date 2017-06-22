@@ -3,7 +3,7 @@
   <div class="sugestoes paddingBottom" @click="irParaEvento(idEvento)">
 
     <div class="sugestoes__foto" :style="`background-image: url('${this.foto}')`">
-
+    <div class="sugestoes__tipo"></div>
     </div>
 
     <div class="sugestoes__info">

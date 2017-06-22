@@ -2,7 +2,7 @@
   <div class="paddingBottom">
     <h2>Localização</h2>
 
-    <el-row style="padding-left:0; padding-right:0;" class="mapa">
+    <el-row style="padding-left:0; padding-right:0;" class="mapa" :style="mapStyle">
 
       <el-tooltip placement="top" class="mapa__info" :value="false" effect="dark">
         <div slot="content">
@@ -21,12 +21,15 @@
   // TODO : Vue-resource para obter coordenadas ou prop
 
   export default {
-    data(){
-      return {
-        center: {lat: 40.640999, lng: -8.642626},
+    props:['lat','lng'],
+    computed: {
+      mapUrl(){
+        return `'https://maps.googleapis.com/maps/api/staticmap?center="${this.lat},${this.lng}"&zoom=18&size=700x260&key=AIzaSyDeycVva7lFs4Eaye6rvXWknNEGguBEMAg'`
+      },
+      mapStyle(){
+        return `background-image: url(${this.mapUrl})`
       }
     },
-    computed: {},
     methods: {}
   }
 
@@ -42,7 +45,6 @@
     width: 100%;
     background: {
       color: $colorBase7;
-      image: url('https://maps.googleapis.com/maps/api/staticmap?center="Pateira de Frossos"&zoom=18&size=700x260&key=AIzaSyDeycVva7lFs4Eaye6rvXWknNEGguBEMAg');
       size: cover;
       position: center;
     }

@@ -8,23 +8,23 @@
 </template>
 
 <script>
-import Nav from './components/global/Nav.vue';
-import Footer from './components/global/Footer.vue';
+  import Nav from './components/global/Nav.vue';
+  import Footer from './components/global/Footer.vue';
 
-export default {
-  name: 'app',
-  components: {
-    'app-nav':Nav,
-    'app-footer': Footer
+  export default {
+    name: 'app',
+    components: {
+      'app-nav': Nav,
+      'app-footer': Footer
+    }
   }
-}
 </script>
 
 <style lang="scss">
   #app {
-      display: flex;
-      min-height: 100vh;
-      flex-direction: column;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
   }
 
   .app__content {

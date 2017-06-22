@@ -8,6 +8,7 @@ Vue.use(Vuex);
 
   Depois para fazer render de componentes seletivamente de acordo com o scope basta meter na propriedade computed:
  ...mapGetters([
+ 'getConcluido',
  'auth',
  'idUtilizador',
  'publicoScope',
@@ -24,9 +25,13 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     user: null, // default é null
+    get: false
   },
   // Getter para ter data binding
   getters: {
+    getConcluido: state => {
+      return state.get;
+    },
     idUtilizador: state => {
       return state.user ? state.user.id : false;
     },
@@ -56,6 +61,12 @@ export const store = new Vuex.Store({
     },
     logout: state => {
       state.user = false;
+    },
+    getFeito: state => {
+      state.get = true;
+    },
+    getDesfeito: state => {
+      state.get = false;
     }
   },
   action: {

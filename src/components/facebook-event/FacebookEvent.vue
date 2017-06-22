@@ -21,7 +21,7 @@
 export default {
 
   // TODO : Vue-resource para dados ou prop
-
+  // LINK: https://graph.facebook.com/1769492436713853?fields=owner,name,start_time,end_time,place,description,attending_count,interested_count,maybe_count,cover,is_canceled&access_token=466806433669455|d75cf22da8370a1b43106b9aae300c81
 
   data(){
     return {

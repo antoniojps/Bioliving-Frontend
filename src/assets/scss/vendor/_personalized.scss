@@ -29,6 +29,8 @@
   margin:0;
 }
 
+/* Buttons */
+
 .el-button--text {
   border: none;
   color: $colorVerde;
@@ -48,3 +50,42 @@
   }
 }
 
+.el-button--info.is-plain:active {
+  background: #fff;
+  border-color: $colorVerde2;
+  color: $colorVerde;
+  outline: 0;
+}
+
+.el-button--info.is-plain:focus, .el-button--info.is-plain:hover {
+  background: #fff;
+  border-color: $colorVerde;
+  color: $colorVerde;
+}
+
+.el-button--primary.btn--facebook{
+  color: #fff;
+  background-color: $colorFacebook;
+  border-color: $colorFacebook;
+}
+
+.el-button--primary:active.btn--facebook {
+  background-color: $colorFacebook2;
+  border-color: $colorFacebook2;
+}
+
+/* /Buttons */
+
+/* Loader */
+
+.el-loading-spinner .el-loading-text {
+  color: $colorVerde;
+  margin: 3px 0;
+  font-size: 14px;
+}
+
+.el-loading-spinner .path {
+  stroke: $colorVerde;
+}
+
+/* /Loader */

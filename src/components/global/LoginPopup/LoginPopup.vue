@@ -188,7 +188,7 @@
         'auth'
       ]),
       uploadUrl(){
-        return `${this.$http.options.root}/upload/avatar`;
+        return `${this.$http.options.root}/imagens/avatar`;
       },
       dialogTypeProp(){ return this.dialogType;}
 

@@ -1,0 +1,30 @@
+.loading-bar{
+  width:100%;
+  height:$sizeBase;
+  background-color:$colorBase7;
+  border:{
+    radius:$radius;
+  }
+  margin:{
+    bottom:$spacingBase
+  }
+  &--md{
+    height:$sizeMedium;
+  }
+
+  &--lg{
+    height:$sizeLarge;
+  }
+
+  &--half{
+    width:50%;
+  }
+
+  &--quarter{
+    width:25%;
+  }
+
+  &--fuller{
+    width:75%;
+  }
+}

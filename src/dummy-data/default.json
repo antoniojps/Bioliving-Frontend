@@ -1,0 +1,10 @@
+{
+  "status": "200",
+  "info": "Informaçao aqui sobre erro ou sucesso",
+  "data": [
+    {
+      "dados": "aqui"
+    }
+  ]
+}
+
