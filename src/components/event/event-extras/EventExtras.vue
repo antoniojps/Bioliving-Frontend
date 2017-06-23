@@ -1,26 +1,6 @@
 <template>
   <div class="paddingVertLarge" v-if="extras">
 
-    <!-- Infos default
-    <el-row :gutter="12" class="extra">
-      <el-col :xs="4" :sm="2" :md="2" :lg="2" class="extra__icon">
-        <i class="fa fa-calendar-o"></i>
-      </el-col>
-
-      <el-col :xs="20" :sm="22" :md="22" :lg="22">
-
-        <div class="extra__title">
-          <h2>{{horaTitulo}}</h2>
-          <div class="extra__title--icon">
-            <i class="fa fa-clock-o"></i>
-            <p>{{horaInicio}}</p>
-          </div>
-        </div>
-        <p>{{humanizarHorario}}</p>
-      </el-col>
-    </el-row>
-    -->
-
     <event-extra v-if="data"  :titulo="horaTitulo" :descricao="humanizarHorario" icon="fa-calendar-o" :descricaoExtra="horaInicio" iconSm="fa-clock-o"></event-extra>
     <event-extra v-for="(extra,index) in extras"
                  :titulo="extra.titulo"
