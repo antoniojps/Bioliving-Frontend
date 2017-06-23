@@ -9,16 +9,15 @@ export default class Autenticacao {
     Vue.http.get('me').then(resposta=>{
       // 200 -> login feito
       store.commit('getFeito');
-      console.log('getFeito');
       return resposta.json()
     }, resposta => {
       // 401
+      store.commit('getFeito');
       return false;
     }).then((data)=>{
       // Se user esta logado guardar informaçao na store, caso contrario guardar false
       data ? store.commit('login',data) : store.commit('logout');
       store.commit('getDesfeito');
-      console.log('getDesfeito');
     })
   }
 

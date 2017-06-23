@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO Mostrar so se tiver colaboradores no resultado -->
   <div class="colaboradores">
   <el-row :gutter="12">
     <h2>Colaboradores</h2>

@@ -29,6 +29,7 @@
                       :nome="evento.nome_evento"
                       :dataEvento="evento.data_evento"
                       :foto="evento.fotos"
+                      :tipoEvento="evento.nome_tipo_evento"
                       :key="evento.id_eventos">
       </event-sugestao>
     </el-col>
@@ -100,9 +101,6 @@
               "interessados": "1",
               "fotos": "http://i.imgur.com/EPPQu4t.png"
 
-            },
-            {
-              "info": "final dos resultados"
             }
           ]
         }

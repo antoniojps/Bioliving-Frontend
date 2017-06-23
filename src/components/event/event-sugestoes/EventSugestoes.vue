@@ -6,7 +6,7 @@
                       :idEvento="evento.id_eventos"
                       :nome="evento.nome_evento"
                       :dataEvento="evento.data_evento"
-                      :foto="evento.fotos.split(',')[0]"
+                      :foto="evento.fotos"
                       :key="evento.id_eventos">
       </event-sugestao>
     </el-row>

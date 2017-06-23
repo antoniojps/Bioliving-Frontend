@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "element-ui": "^1.3.4",
+    "linkifyjs": "^2.1.4",
     "moment": "^2.18.1",
     "vue": "^2.3.3",
     "vue-progressbar": "^0.7.2",

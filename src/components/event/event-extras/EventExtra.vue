@@ -1,25 +1,5 @@
 <template>
   <div>
-    <!-- Infos default -->
-    <el-row :gutter="12" class="extra" v-if="index===0">
-      <el-col :xs="4" :sm="2" :md="2" :lg="2" class="extra__icon">
-        <i class="fa fa-calendar-o"></i>
-      </el-col>
-
-      <el-col :xs="20" :sm="22" :md="22" :lg="22">
-
-        <div class="extra__title">
-          <h2>{{horaTitulo}}</h2>
-          <div class="extra__title--icon">
-            <i class="fa fa-clock-o"></i>
-            <p>{{horaInicio}}</p>
-          </div>
-        </div>
-        <p>{{humanizarHorario}}</p>
-      </el-col>
-    </el-row>
-
-
     <!-- infos do utilizador -->
     <el-row :gutter="12" class="extra">
       <el-col :xs="4" :sm="2" :md="2" :lg="2" class="extra__icon">
@@ -88,7 +68,7 @@
           nextDay: '[Amanhã!]',
           nextWeek: '[Este] dddd!',
           lastDay: '[Foi ontem...]',
-          lastWeek: '[Última] dddd',
+          lastWeek: '[Foi] dddd',
           sameElse: 'DD/MM/YYYY'
         });
       }
