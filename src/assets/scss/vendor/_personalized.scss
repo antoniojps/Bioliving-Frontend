@@ -81,6 +81,19 @@
 }
 
 
+.btn--delete.el-button:focus {
+  background: #fff;
+  border: 1px solid #c4c4c4;
+  color: $colorBase;
+  outline: 0;
+}
+
+.btn--delete.el-button:hover {
+  color: $colorVerde;
+  border-color: $colorVerde;
+  outline: 0;
+}
+
 /* /Buttons */
 
 /* Loader */
@@ -95,4 +108,29 @@
   stroke: $colorVerde;
 }
 
+.el-date-table td.today {
+  color: $colorVerde;
+  position: relative;
+}
+
+.el-date-table td.today:before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: .5em solid $colorVerde;
+  border-left: .5em solid transparent;
+}
+
 /* /Loader */
+
+/* Date picker */
+
+.el-date-table td.current:not(.disabled), .el-date-table td.end-date, .el-date-table td.start-date {
+  background-color: $colorVerde!important;
+  color: #fff;
+}
+
+/* /Date picker */

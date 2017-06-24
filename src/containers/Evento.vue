@@ -107,7 +107,7 @@
                 <h2 class="paddingVertBase info-preco__title" v-if="mostrarPreco">Por pessoa: {{preco}}</h2>
                 <h2 class="paddingVertBase info-preco__title" v-else>{{preco}}</h2>
               </div>
-              <p class="size-sm info-preco__data">{{humanizarHorarioRelativo}}</p>
+              <p v-if="evento.data[0].data_evento" class="size-sm info-preco__data">{{humanizarHorarioRelativo}}</p>
             </div>
           </el-col>
         </el-row>
@@ -135,7 +135,7 @@
         <!-- /Componente Localizacao -->
 
         <!-- Componente Localizacao -->
-        <event-colaboradores v-if="evento.data"></event-colaboradores>
+        <event-colaboradores v-if="evento.data" :idEvento="id"></event-colaboradores>
         <!-- /Componente Localizacao -->
 
         <hr v-if="evento.data">
