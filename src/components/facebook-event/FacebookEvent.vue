@@ -1,7 +1,7 @@
 <template>
   <div @click="goToPage">
 
-    <div class="facebook-event" @mouseover="mouseHandler(true)" @mouseleave="mouseHandler(false)" v-if="facebookData.data"
+    <div class="facebook-event marginBottomLarge" @mouseover="mouseHandler(true)" @mouseleave="mouseHandler(false)" v-if="facebookData.data"
          :class="{'facebook-event--hover': mouseOver}">
         <div class="facebook-event__photo" v-if="facebookData.data.cover" :style="backgroundStyle">
         </div>
@@ -16,7 +16,7 @@
         </el-col>
       </div>
     </div>
-    <div class="facebook-event" @mouseover="mouseHandler(true)" @mouseleave="mouseHandler(false)" v-loading="!facebookData.data"
+    <div class="facebook-event marginBottomLarge" @mouseover="mouseHandler(true)" @mouseleave="mouseHandler(false)" v-loading="!facebookData.data"
           v-else
          :class="{'facebook-event--hover': mouseOver}">
       <div class="facebook-event__photo facebook--event__photo--shadow">
@@ -63,6 +63,7 @@
 
     data(){
       return {
+        resize: '',
         mouseOver: false,
         facebookData: {}
       }
@@ -92,7 +93,7 @@
   .facebook-event {
     width: 100%;
     padding: {
-      bottom: $spacingBase
+      bottom: $spacingBase;
     }
   ;
     border: $borderSize $colorBase7 solid;

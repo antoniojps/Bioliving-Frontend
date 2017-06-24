@@ -1,37 +1,52 @@
 <template>
   <el-row :gutter="24" style="margin-left:auto;margin-right:auto;">
 
-    <el-col style="padding:0; text-align:center">
+    <el-col style=" text-align:center">
       <h1>Natureza e Educação para Todos</h1>
 
-      <el-input class="btn-search__home"
+
+      <el-input class="home__pesquisa--btn"
                 placeholder="Procure eventos"
                 icon="search"
                 v-model="inputSearch"
-                :on-icon-click="searchEventos">
+                :on-icon-click="searchEventos"
+      >
       </el-input>
 
       <el-date-picker
         v-model="dataInicio"
+        class="home__pesquisa"
         type="date"
         placeholder="Desde">
       </el-date-picker>
- <el-date-picker
+      <el-date-picker
+        class="home__pesquisa"
         v-model="dataFim"
         type="date"
         placeholder="Até">
       </el-date-picker>
+      <el-button type="primary" icon="search" class="home__pesquisa--btn--marginBottom">Pesquisar</el-button>
 
     </el-col>
     <el-col :xs="24">
-      <event-sugestao v-for="evento in eventos.data"
-                      :idEvento="evento.id_eventos"
-                      :nome="evento.nome_evento"
-                      :dataEvento="evento.data_evento"
-                      :foto="evento.fotos"
-                      :tipoEvento="evento.nome_tipo_evento"
-                      :key="evento.id_eventos">
-      </event-sugestao>
+      <!-- loading -->
+      <div class="home--loading" style="min-height:40vh" v-loading="!ajaxFeito"
+           element-loading-text="A carregar eventos..." v-if="!ajaxFeito">
+      </div>
+
+      <!-- ajaxFeito -->
+      <div v-else>
+        <event-sugestao v-for="evento in eventos.data"
+                        :idEvento="evento.id_eventos"
+                        :nome="evento.nome_evento"
+                        :dataEvento="evento.data_evento"
+                        :foto="evento.fotos"
+                        :tipoEvento="evento.nome_tipo_evento"
+                        :lat="evento.lat"
+                        :lng:="evento.lng"
+                        :key="evento.id_eventos">
+        </event-sugestao>
+      </div>
     </el-col>
 
 
@@ -41,6 +56,8 @@
 
 <script>
   import EventSugestao from './../components/event/event-sugestoes/EventSugestao.vue';
+  import lodashDebounce from 'lodash.debounce';
+  import {mapGetters} from 'vuex';
 
   export default {
     components: {
@@ -48,69 +65,74 @@
     },
     data(){
       return {
-
         inputSearch: '',
+        ajaxFeito: false,
+        erro: false,
         dataInicio: '',
         dataFim: '',
-        eventos: {
-          "status": "200",
-          "data": [
-            {
-              "id_eventos": "25",
-              "nome_evento": "BioLousada - FieldSketching",
-              "nome_tipo_evento": "Field Sketching",
-              "nome": "Lousada",
-              "data_evento": "2017-06-17 09:30:00",
-              "descricao_short": "Desenhar a natureza é uma outra forma de vê-la, de se conectar com ela. ",
-              "inscritos": "0",
-              "interessados": "0",
-              "fotos": "http://i.imgur.com/VWPWTXW.png"
-
-            },
-            {
-              "id_eventos": "23",
-              "nome_evento": "Votação online Orçamento Participativo Albergaria-a-Velha",
-              "nome_tipo_evento": "Votação",
-              "nome": "Lousada",
-              "data_evento": "2017-06-20 00:00:00",
-              "descricao_short": "Durante o mês de Junho estão a votação 20 projetos para o Orçamento Participativo do Município de Albergaria-a-Velha, em http://op.cm-albergaria.pt/",
-              "inscritos": "1",
-              "interessados": "1",
-              "fotos": "http://i.imgur.com/wmOUbG4.png"
-            },
-            {
-              "id_eventos": "24",
-              "nome_evento": "LousadaBlitz",
-              "nome_tipo_evento": "Oficina",
-              "nome": "Lousada",
-              "data_evento": "2017-06-22 08:00:00",
-              "descricao_short": "Ser biólogo por um dia!",
-              "inscritos": "0",
-              "interessados": "0",
-              "fotos": "http://i.imgur.com/kBk6DxY.png"
-
-            },
-            {
-              "id_eventos": "22",
-              "nome_evento": "Passeio Botânico",
-              "nome_tipo_evento": "Passeio",
-              "nome": "Pateira de Frossos",
-              "data_evento": "2017-06-30 08:28:00",
-              "descricao_short": " Passeio Botanico à Pateira de Frossos com a Dra. Rosa Pinho, botânica e curadora do herbário do Departamento de Biologia da Universidade de Aveiro.",
-              "inscritos": "1",
-              "interessados": "1",
-              "fotos": "http://i.imgur.com/EPPQu4t.png"
-
-            }
-          ]
-        }
+        eventos: {}
       }
     },
 
     methods: {
       searchEventos(){
         console.log('eventos');
+      },
+      getDados(){
+        console.log('getDados');
+        this.$http.get(`pesquisa/eventos`).then(resposta => {
+          // 200 OK
+          this.erro = false;
+          return resposta.json()
+        }, resposta => {
+          // erro
+          this.erro = true;
+          return false;
+        }).then((data) => {
+          this.eventos = data;
+          this.ajaxFeito = true;
+
+        })
       }
+    },
+
+    watch: {
+
+      getConcluido(){
+        if (this.getConcluido) {
+          this.getDados();
+        }
+      }
+      ,
+      inputSearch: lodashDebounce(function (inputSearch) {
+        if (this.ajaxFeito) {
+          this.$http.get(`pesquisa/eventos?msg=${inputSearch}`).then(resposta => {
+            // 200 -> login feito
+            this.erro = false;
+            return resposta.json()
+          }, resposta => {
+            // 401
+            this.erro = true;
+            return false;
+          }).then((data) => {
+            // Se user esta logado guardar informaçao na store, caso contrario guardar false
+            this.eventos = data;
+          })
+        }
+      }, 250, {'maxWait': 5000}),
+    },
+
+    computed: {
+      ...mapGetters([
+        'getConcluido',
+        'auth',
+        'idUtilizador',
+        'publicoScope',
+        'normalScope',
+        'socioScope',
+        'colaboradorScope',
+        'adminScope'
+      ]),
     }
   }
 </script>
@@ -118,9 +140,31 @@
 <style lang="scss">
   @import '../assets/scss/styles.scss';
 
-  .btn-search__home {
-    width: 30%;
-
+  .home {
+    &__pesquisa {
+      &--btn {
+        width: 100%;
+        margin-bottom: $spacingBase;
+        @include screen(md) {
+          width: auto;
+          margin-bottom: 0;
+        }
+        &--marginBottom {
+          width: 100%;
+          margin-top: $spacingBase;
+          @include screen(md) {
+            width: auto;
+            margin-bottom: 0;
+          }
+        }
+      }
+      &.el-date-editor.el-input {
+        width: 49%;
+        @include screen(md) {
+          width: 20%;
+        }
+      }
+    }
   }
 
 </style>

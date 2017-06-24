@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-input
-      placeholder="Procurar eventos"
+      placeholder="Procurar"
       icon="search"
       v-model="searchInput"
       :on-icon-click="handleIconClick"

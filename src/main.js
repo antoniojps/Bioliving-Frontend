@@ -3,6 +3,7 @@ import ElementUi from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/pt';
 import VueProgressBar from 'vue-progressbar';
 import SocialSharing from 'vue-social-sharing';
+import * as VueGoogleMaps from 'vue2-google-maps';
 
 import Vue from 'vue'
 window.Vue = Vue
@@ -23,6 +24,12 @@ Vue.use(VueProgressBar, {
 });
 Vue.use(SocialSharing);
 
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyDeycVva7lFs4Eaye6rvXWknNEGguBEMAg'
+  }
+});
+
 // Http
 Vue.http.options.root = 'http://slimapp/api';
 Vue.http.options.headers = 'Content-type: application/json';
@@ -31,7 +38,6 @@ Vue.http.interceptors.push((request, next) => {
   request.credentials = true;
   next();
 });
-
 
 // Routes
 Vue.use(VueRouter);

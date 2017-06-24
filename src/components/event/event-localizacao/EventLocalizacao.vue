@@ -1,36 +1,64 @@
 <template>
   <div class="paddingBottom">
     <h2>Localização</h2>
+    <gmap-map
+      ref="gmap"
+      :center="center"
+      :zoom="16"
+      class="mapa"
+      @bounds_changed="bordasAtualizadas($event)"
+    >
+      <gmap-marker
+        :key="index"
+        v-for="(marker,index) in markers"
+        :position="marker.position"
+        :clickable="true"
+        :draggable="false"
+        @click="center=marker.position"
+      ></gmap-marker>
 
-    <el-row style="padding-left:0; padding-right:0;" class="mapa" :style="mapStyle">
+    </gmap-map>
 
-      <el-tooltip placement="top" class="mapa__info" :value="false" effect="dark">
-        <div slot="content">
-          <h3 style="color:white; text-align:center" class="align-center size-md paddingFix">Encontramo-nos aqui:</h3>
-          <p style="color:white" class="align-right size-sm paddingFix">
-            Parque da Boca do Carreiro - Pateira de Frossos</p>
-        </div>
-        <el-button>Top center</el-button>
-      </el-tooltip>
-    </el-row>
   </div>
 </template>
 
 <script>
 
-  // TODO : Vue-resource para obter coordenadas ou prop
+  import {Map,Marker} from 'vue2-google-maps';
+  import lodashDebounce from 'lodash.debounce';
 
   export default {
+
+    components: {
+      'gmap-map': Map,
+      'gmap-marker': Marker
+    },
+
     props:['lat','lng'],
+    data () {
+      return {
+
+      }
+    },
     computed: {
-      mapUrl(){
-        return `'https://maps.googleapis.com/maps/api/staticmap?center="${this.lat},${this.lng}"&zoom=18&size=700x260&key=AIzaSyDeycVva7lFs4Eaye6rvXWknNEGguBEMAg'`
+      center(){
+        return {lat: parseFloat(this.lat), lng: parseFloat(this.lng)};
+      },
+      markers(){
+        return [{ position: {lat: parseFloat(this.lat), lng: parseFloat(this.lng) }}];
       },
       mapStyle(){
         return `background-image: url(${this.mapUrl})`
       }
     },
-    methods: {}
+
+    methods: {
+      // Debounce para ser chamado so de 1s em 1s (controlar event triggers)
+      bordasAtualizadas: lodashDebounce(function($e){
+        // $e tem as coordenadas das bordas
+        console.log(`Lng Este: ${$e.b.b} Lng Oeste: ${$e.b.f} Lat Norte: ${$e.f.f} Lat Sul: ${$e.f.b}`);
+      },500, { 'maxWait': 5000 })
+    }
   }
 
 </script>

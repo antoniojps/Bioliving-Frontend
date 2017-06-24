@@ -243,7 +243,7 @@
       },
 
       getDados(){
-        Vue.http.get('eventos/' + this.id).then(resposta => {
+        this.$http.get('eventos/' + this.id).then(resposta => {
           this.paginaInexistente = false;
           // 200 -> dados obtidos
           return resposta.json()
