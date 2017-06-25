@@ -3,9 +3,11 @@
   <!-- TODO: Versao da nav com login efetuado -->
 
   <div class="nav">
+    <router-link to="/">
     <div class="nav__brand" @click="redirectHome">
       <div class="nav__brand--logo"></div>
     </div>
+    </router-link>
     <!-- Mobile nav -->
     <div class="nav__right nav__right--mobile mobile">
       <div class="nav__right--search">
@@ -21,11 +23,34 @@
         <app-event-search></app-event-search>
       </div>
       <div class="nav__right--links">
-        <el-tabs v-model="nomeAtivo" @tab-click="handleClick">
+
+        <div class="nav__user" v-if="auth">
+          <el-popover ref="popover2" placement="bottom" width="200" trigger="hover">
+            <ul class="nav__user--ul">
+              <router-link to="../perfil" class="nav__user--link">
+                <li><i class="fa fa-user-o"></i> Meu perfil</li>
+              </router-link>
+              <router-link to="../interesses" class="nav__user--link">
+                <li><i class="fa fa-heart-o"></i> Interesses</li>
+              </router-link>
+              <router-link to="../certificados" class="nav__user--link">
+                <li><i class="fa fa-heart-o"></i> Certificados</li>
+              </router-link>
+              <router-link to="../ajuda" class="nav__user--link">
+                <li><i class="fa fa-info"></i> Ajuda</li>
+              </router-link>
+              <li><div style="width:100%; height:100%" @click="logout"><i class="fa fa-sign-out"></i> Sair</div></li>
+            </ul>
+          </el-popover>
+
+          <div class="nav__user--photo" v-popover:popover2>
+          </div>
+        </div>
+
+        <el-tabs class="nav__tabs" v-model="nomeAtivo" @tab-click="handleClick">
           <el-tab-pane label="Eventos da Bioliving" name="/"></el-tab-pane>
           <el-tab-pane label="Entrar" name="login" v-if="!auth"></el-tab-pane>
           <el-tab-pane label="Inscrever" name="inscrever" v-if="!auth"></el-tab-pane>
-          <el-tab-pane label="Sair" name="logout" v-if="auth"></el-tab-pane>
         </el-tabs>
       </div>
     </div>
@@ -80,13 +105,16 @@
           this.dialogTypeProp = 'Inscrever';
           this.dialogVisible = true;
         } else if (this.nomeAtivo === 'logout') {
-           this.logout();
+          this.logout();
         }
       },
       redirectHome(){
         // redirecionar para index e atualiar active no menu
         this.$router.push('/');
         this.nomeAtivo = '/';
+      },
+      redirect(router){
+        this.$router.push(router);
       },
       // Eventos dialogClose e dialogChange
       dialogClosed(){
@@ -147,6 +175,53 @@
     margin-bottom: $spacingLarge;
     border-bottom: $borderSize $colorBase7 solid;
     display: flex;
+
+    &__tabs {
+      display: inline;
+    }
+    &__user {
+      display: inline;
+      &--photo {
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        text-align:center;
+        padding-top:10px;
+        transform:translateY(10%);
+        cursor:pointer;
+        background-image:url(http://loremflickr.com/50/50);
+        background-color: $colorBg;
+
+        border:$borderSize $colorBase7 solid;
+        margin-right:$sizeBase;
+      }
+      &--link {
+        text-decoration: none;
+      }
+      &--ul {
+        list-style-type: none;
+
+        li {
+          padding: $spacingBase;
+          font-size: $sizeBase;
+          border: {
+            top: $borderSize $colorBase7 solid;
+          }
+          color: $colorBase4;
+          i {
+            width: 10%;
+            text-align: center;
+            text-decoration: none;
+            padding-right: $spacingSmall;
+          }
+
+        }
+        li:hover {
+          color: $colorVerde;
+          cursor: pointer;
+        }
+      }
+    }
   }
 
   .nav__brand {
@@ -202,6 +277,9 @@
         right: $spacingBase;
       }
       text-align: right;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
 
       ul {
         list-style-type: none;

@@ -1,5 +1,5 @@
 <template>
-  <div @click="goToPage">
+  <div @click="goToPage" v-if="facebookIdValido">
 
     <div class="facebook-event marginBottomLarge" @mouseover="mouseHandler(true)" @mouseleave="mouseHandler(false)" v-if="facebookData.data"
          :class="{'facebook-event--hover': mouseOver}">
@@ -48,15 +48,14 @@
         // 200 -> dados obtidos
         return resposta.json();
       }, resposta => {
-        // erro
-        if (resposta.status === 404) {
-          console.log('pagina facebook inexistente');
-        }
+
         return false;
       }).then((data) => {
         this.facebookData = data;
+        this.facebookIdValido = true;
         if (data.status === '200') {
         } else {
+          this.facebookIdValido = false;
         }
       });
     },
@@ -65,7 +64,8 @@
       return {
         resize: '',
         mouseOver: false,
-        facebookData: {}
+        facebookData: {},
+        facebookIdValido: true
       }
     },
     methods: {

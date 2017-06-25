@@ -4,6 +4,7 @@ import locale from 'element-ui/lib/locale/lang/pt';
 import VueProgressBar from 'vue-progressbar';
 import SocialSharing from 'vue-social-sharing';
 import * as VueGoogleMaps from 'vue2-google-maps';
+import infiniteScroll from 'vue-infinite-scroll'
 
 import Vue from 'vue'
 window.Vue = Vue
@@ -23,6 +24,7 @@ Vue.use(VueProgressBar, {
   height: '2px'
 });
 Vue.use(SocialSharing);
+Vue.use(infiniteScroll);
 
 Vue.use(VueGoogleMaps, {
   load: {

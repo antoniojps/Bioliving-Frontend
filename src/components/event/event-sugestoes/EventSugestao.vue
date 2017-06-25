@@ -26,14 +26,18 @@
           <!-- /default -->
 
           <div class="sugestoes__tipo" v-if="tipoEvento" :title="tipoEvento" style="z-index: 1000;">
-            <i class="fa" :class="classIcon" aria-hidden="true"></i>
+            <el-tooltip content="Tipo de Evento" placement="top">
+              <i class="fa" :class="classIcon" aria-hidden="true"></i>
+            </el-tooltip>
           </div>
 
           <!-- Gostar -->
           <transition name="el-fade-in-linear">
             <div class="sugestoes__gostar" v-if="auth && interesseAjaxFeito" title="Whishlist" style="z-index: 1000;"
                  @click="clicarInteresse">
-              <i class="fa fa-heart" :class="classGosto" aria-hidden="true"></i>
+              <el-tooltip content="Mostrar interesse" placement="top">
+                <i class="fa fa-heart" :class="classGosto" aria-hidden="true"></i>
+              </el-tooltip>
             </div>
           </transition>
           <!-- /Gostar -->
@@ -41,20 +45,24 @@
 
           <div class="sugestoes__down">
             <div class="sugestoes__down--lft" v-if="dataEvento">
-              <el-button type="primary" class="btn--base2" size="small">
-                <i class="fa fa-calendar-o" aria-hidden="true"></i> {{dataFormatada}}
-              </el-button>
-
+              <el-tooltip content="Data do Evento" placement="top">
+                <el-button type="primary" class="btn--base2" size="small">
+                  <i class="fa fa-calendar-o" aria-hidden="true"></i> {{dataFormatada}}
+                </el-button>
+              </el-tooltip>
             </div>
             <div class="sugestoes__down--rht">
-              <el-button :plain="true" :disabled="true" class="btn--primary" size="small" v-if="passado"
-                         title="Inscrições fechadas">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-              </el-button>
-              <el-button type="primary" class="btn--primary" size="small" title="inscrever" @click="clicarInscrever"
-                         v-else>
-                <i class="fa fa-plus" aria-hidden="true"></i>
-              </el-button>
+              <el-tooltip content="Inscrever" placement="top">
+
+                <el-button :plain="true" :disabled="true" class="btn--primary" size="small" v-if="passado"
+                           title="Inscrições fechadas">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </el-button>
+                <el-button type="primary" class="btn--primary" size="small" title="inscrever" @click="clicarInscrever"
+                           v-else>
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </el-button>
+              </el-tooltip>
             </div>
           </div>
         </div>
