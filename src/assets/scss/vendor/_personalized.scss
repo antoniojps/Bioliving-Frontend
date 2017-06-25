@@ -143,7 +143,10 @@
 
 /* /Popover */
 
-/* transiçoes */
+/* menu nav */
 
+.el-menu--horizontal.el-menu--dark .el-submenu .el-menu-item.is-active, .el-menu-item.is-active {
+  color: $colorVerde;
+}
 
-/* /transiçoes */
+/* /menu nav */

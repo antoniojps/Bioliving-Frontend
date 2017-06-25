@@ -25,7 +25,7 @@ body {
 
 hr {
   border: {
-    top: 0.1875rem solid $colorBase7;
+    top: $borderSize solid $colorBase7;
   }
 
   margin: {

@@ -70,6 +70,7 @@
         <div class="sugestoes__info">
           <h3>{{nome}}</h3>
           <p v-if="dataEvento"> {{humanizarHorario}}</p>
+          <p v-else style="opacity:0">.</p>
         </div>
 
       </div>

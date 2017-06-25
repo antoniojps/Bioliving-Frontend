@@ -103,7 +103,6 @@
   import {mapGetters} from 'vuex';
   import H from './../custom/Helpers';
 
-
   export default {
     components: {
       'event-sugestao': EventSugestao
@@ -255,7 +254,6 @@
           dataMin: this.unixDataInicio,
           dataMax: this.unixDataFim
         };
-
 
         // Limpar keys com valores undefined;
         H.limparObj(obj);

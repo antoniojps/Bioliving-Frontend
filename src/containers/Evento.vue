@@ -31,7 +31,6 @@
         </div>
         <!-- /Componente Eventos -->
 
-
       </el-col>
       <!-- /Coluna esquerda -->
 
