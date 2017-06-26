@@ -90,6 +90,9 @@
 
 .expandir {
   width:100%;
+  @include screen(sm){
+    width:auto;
+  }
 }
 
 

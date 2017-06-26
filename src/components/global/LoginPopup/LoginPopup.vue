@@ -63,13 +63,24 @@
   </el-form>
           <!-- /Register form -->
 
-    <el-button type="text" v-if="dialogTypeProp==='Entrar'" @click="$emit('dialogChange',['Inscrever','inscrever'])">Não tem conta? Inscreva-se</el-button>
-    <el-button type="text" v-if="dialogTypeProp==='Inscrever'"
-               @click="$emit('dialogChange',['Entrar','login'])">Já tem conta? Entrar</el-button>
-    <el-button @click="handleClose">Cancelar</el-button>
+    <el-button class="expandir marginBottom" @click="handleClose">Cancelar</el-button>
     <el-button type="primary" @click="submitForm('formLogin')" v-if="dialogTypeProp==='Entrar'" :loading="loggingIn">Entrar</el-button>
-    <el-button type="primary" @click="submitForm('formRegister')" v-if="dialogTypeProp==='Inscrever'"
-               :loading="loggingIn">Inscrever</el-button>
+    <el-button
+      type="primary"
+      @click="submitForm('formRegister')"
+      v-if="dialogTypeProp==='Inscrever'"
+      :loading="loggingIn">
+      Inscrever
+    </el-button>
+          <el-button
+            class="expandir grey"
+            v-if="dialogTypeProp==='Inscrever'"
+            style="color:black"
+            @click="$emit('dialogChange',['Entrar','login'])">
+            Já tem conta? Entrar
+          </el-button>
+           <el-button v-if="dialogTypeProp==='Entrar'" @click="$emit('dialogChange',['Inscrever','inscrever'])"
+                      class="expandir grey" style="color:black">Inscrever</el-button>
   </span>
   </el-dialog>
 </template>
@@ -92,7 +103,7 @@
       dialogType: {
         type: String
       },
-      query:{
+      query: {
         type: String
       }
     }
@@ -195,7 +206,9 @@
       uploadUrl(){
         return `${this.$http.options.root}/imagens/avatar`;
       },
-      dialogTypeProp(){ return this.dialogType;}
+      dialogTypeProp(){
+        return this.dialogType;
+      }
 
     },
     methods: {
@@ -222,7 +235,7 @@
       handleClose() {
 
         this.$emit('dialogClose');
-        this.$router.push({ path: '/' })
+        this.$router.push({path: '/'})
       },
       // todo vue-resource send authorization request, obter JWT, verificar JWT e guardar na localstorage
       loginHandler(){
@@ -299,16 +312,16 @@
     float: left;
   }
 
-  .pic-upload{
-    width:100%;
-    text-align:center;
+  .pic-upload {
+    width: 100%;
+    text-align: center;
   }
 
   .avatar-uploader .el-upload {
     border: 1px dashed $colorBase4;
-    width:auto;
-    padding:$spacingBase;
-    text-align:center;
+    width: auto;
+    padding: $spacingBase;
+    text-align: center;
     border-radius: 50%;
     cursor: pointer;
     overflow: hidden;
@@ -333,17 +346,18 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    border-radius:50%;
+    border-radius: 50%;
   }
 
-  .formLogin{
-    &--inline{
-      width:49%;
-      text-align:left;
-      display:inline-block;
+  .formLogin {
+    &--inline {
+      width: 49%;
+      text-align: left;
+      display: inline-block;
 
     }
   }
+
 
 </style>
 

@@ -4,28 +4,24 @@
 
   <div class="nav">
     <router-link to="/">
-      <div class="nav__brand" @click="redirectHome">
+      <div class="nav__brand" @click="redirectHome" style="padding:1rem">
         <div class="nav__brand--logo"></div>
       </div>
     </router-link>
     <!-- Mobile nav -->
     <div class="nav__right nav__right--mobile mobile">
-      <div class="nav__right--search">
-      </div>
       <div class="nav__right--links">
-        <i class="fa fa-search size-lg paddingLarge" aria-hidden="true"></i>
-        <i class="fa fa-user size-lg paddingLarge" aria-hidden="true" @click="dialogVisibleProp = true"></i>
+        <a href="#/home/login"><i class="fa fa-user size-lg paddingLarge" aria-hidden="true" @click="dialogVisibleProp = true"></i></a>
+        <a href="#"><i class="fa fa-calendar size-lg paddingLarge" aria-hidden="true" ></i></a>
       </div>
     </div>
     <!-- Desktop nav -->
     <div class="nav__right desktop">
-      <div class="nav__right--search">
-        <app-event-search></app-event-search>
-      </div>
+
       <div class="nav__right--links">
 
         <div class="nav__user" v-if="auth">
-          <el-popover ref="popover2" placement="bottom" width="200" trigger="hover">
+          <el-popover ref="popover2" placement="bottom" width="200" trigger="click">
             <ul class="nav__user--ul">
               <router-link to="../perfil" class="nav__user--link">
                 <li><i class="fa fa-user-o"></i> Meu perfil</li>

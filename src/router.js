@@ -3,6 +3,7 @@ import Evento from './containers/Evento.vue';
 import Login from './containers/Login.vue';
 import Register from './containers/Register.vue';
 import Perfil from './containers/Perfil.vue';
+import Certificado from './containers/Certificado.vue';
 import PageNotFound from './containers/PageNotFound.vue';
 
 
@@ -20,6 +21,7 @@ export const routes = [
   {path: '/', component: Home},
   {path: '/evento/:id', component: Evento, props: true},
   {path: '/perfil', component: Perfil},
+  {path: '/certificado',component: Certificado},
   {path: '*', component: PageNotFound}
 ];
 
