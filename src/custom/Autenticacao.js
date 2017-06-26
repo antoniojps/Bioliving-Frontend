@@ -6,7 +6,7 @@ export default class Autenticacao {
   Guarda a resposta numa variavel global (na store do Vuex)
    */
   static autenticar(){
-    Vue.http.get('me').then(resposta=>{
+    return Vue.http.get('me').then(resposta=>{
       // 200 -> login feito
       store.commit('getFeito');
       return resposta.json()

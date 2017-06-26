@@ -2,7 +2,9 @@
   <div>
     <el-col :xs="24" :sm="6" :md="6" :lg="6" :title="nome">
       <div class="sugestoes paddingBottom">
-        <div class="sugestoes__clicar" @click="clicarEvento"></div>
+        <a :href="`#/evento/${this.idEvento}`">
+          <div class="sugestoes__clicar"></div>
+        </a>
 
         <div class="sugestoes__foto">
           <!-- foto -->

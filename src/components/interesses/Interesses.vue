@@ -12,7 +12,7 @@
     </transition-group>
 
     <div class="interesses--erro" v-if="erro">
-      <h3><i class="fa fa-sad" aria-hidden="true"></i> Não conseguimos concluir a pesquisa de eventos que lhe interessam
+      <h3><i class="fa fa-sad" aria-hidden="true"></i> Não conseguimos concluir a pesquisa de eventos que está inscrito
       </h3>
     </div>
 
@@ -22,7 +22,7 @@
     </div>
 
     <div class="interesses--erro align-center" v-if="semResultados">
-      <h3><i class="fa fa-sad" aria-hidden="true"></i> Sem eventos que lhe interessem?</h3>
+      <h3><i class="fa fa-sad" aria-hidden="true"></i> Sem eventos que lhe inscritos?</h3>
       <router-link to="../">
         <el-button type="primary" size="mini">Pesquisar eventos</el-button>
       </router-link>
@@ -126,7 +126,8 @@
     &__wrapper {
       border: $borderSize $colorBase7 solid;
       border-radius: $radius;
-      max-height: 50vh;
+      min-height: 50vh;
+      max-height:50vh;
       overflow-y: scroll;
     }
     &--erro, &--erro, &--loading {

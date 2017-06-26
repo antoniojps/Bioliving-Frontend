@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <vue-progress-bar></vue-progress-bar>
-    <app-nav></app-nav>
+    <app-nav :dialogVisible="login"></app-nav>
     <router-view class="app__content"></router-view>
     <app-footer></app-footer>
   </div>
@@ -16,6 +16,11 @@
     components: {
       'app-nav': Nav,
       'app-footer': Footer
+    },
+    computed:{
+      login(){
+        return this.$route.path === '/home/login' || this.$route.path === '/home/inscrever';
+      }
     }
   }
 </script>

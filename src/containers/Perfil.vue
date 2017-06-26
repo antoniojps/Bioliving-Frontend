@@ -44,8 +44,16 @@
               </el-select>
             </el-form-item>
 
+            <el-form-item label="Localização">
+              <localizacao-input
+                @localInput="guardarLocalId"
+                :placeholder="utilizador.morada"
+              ></localizacao-input>
+            </el-form-item>
+
             <el-form-item label="Data de nascimento">
               <el-date-picker
+                format="yyyy-MM-dd"
                 v-model="utilizadorForm.dataNascimento"
                 type="date"
                 placeholder="Data de nascimento">
@@ -65,15 +73,27 @@
             <el-form-item>
               <el-button type="primary" @click="onSubmit">Atualizar</el-button>
             </el-form-item>
+
           </el-form>
-          <div class="perfil--loading"
+
+
+          <div class="perfil--loading" v-if="!utilizador"
                v-loading="!utilizador"
                element-loading-text="A carregar perfil...">
           </div>
         </el-col>
-        <el-col :gutter="24" :xs="24" :sm="24" :md="12" :lg="12" class="paddingVertBase">
-          <h2>Interesses</h2>
-          <user-interesses v-if="ajaxFeito" :idUtilizador="idUtilizador"></user-interesses>
+        <el-col :gutter="24" :xs="24" :sm="24" :md="12" :lg="12" class="perfil--right paddingVertBase">
+          <el-tabs type="card" @tab-click="tabClick">
+            <el-tab-pane label="Interesses">
+              <user-interesses v-if="ajaxFeito" :idUtilizador="idUtilizador"></user-interesses>
+            </el-tab-pane>
+            <el-tab-pane label="Certificados">
+              <user-certificados v-if="ajaxFeito && certificadosActive" :idUtilizador="idUtilizador"></user-certificados>
+            </el-tab-pane>
+            <el-tab-pane label="Inscrições">
+              <user-inscricoes v-if="ajaxFeito && inscricoesActive" :idUtilizador="idUtilizador"></user-inscricoes>
+            </el-tab-pane>
+          </el-tabs>
         </el-col>
       </div>
       <div v-else v-cloak>
@@ -87,21 +107,29 @@
 
   import Estatuto from '../components/global/Estatuto/Estatuto.vue';
   import Interesses from '../components/interesses/Interesses.vue';
+  import Certificados from '../components/Certificados/Certificados.vue';
+  import Inscricoes from '../components/Inscricoes/Inscricoes.vue';
+  import LocalizacaoInput from '../components/global/LocalizacaoSearch/LocalizacaoInput.vue';
   import {mapGetters} from 'vuex';
-
+  import Helper from '../custom/Helpers';
+  import moment from 'moment';
 
   export default {
+
+    props:['query'],
 
     beforeUpdate(){
       if (!this.auth) {
         this.$router.replace('../');
-        console.log('beforeUpdate');
       }
     },
 
     components: {
       'el-estatuto': Estatuto,
-      'user-interesses': Interesses
+      'user-certificados' : Certificados,
+      'user-inscricoes' : Inscricoes,
+      'user-interesses': Interesses,
+      'localizacao-input': LocalizacaoInput
     },
 
 
@@ -127,14 +155,66 @@
           sobre: '',
           sobreMini: '',
           telemovel: '',
-
+          idLocal: '',
         },
-        ajaxFeito: false
+        ajaxFeito: false,
+        requestAtivo: false,
+        certificadosActive: false,
+        inscricoesActive : false
       }
     },
     methods: {
+      guardarLocalId(id){
+        this.utilizadorForm.idLocal = id;
+      },
+      tabClick(tab, event){
+
+        // Certificados
+        if(tab.index==="1"){
+          this.certificadosActive = true;
+          // Interesses
+        } else if(tab.index==="2"){
+          this.inscricoesActive = true;
+        }
+
+        console.log(this.inscricoesActive);
+      },
       onSubmit() {
-        console.log('submit!');
+        this.requestAtivo = true;
+        if(this.utilizadorForm.genero === 'Masculino') this.utilizadorForm.genero = 1;
+        else if(this.utilizadorForm.genero === 'Feminino') this.utilizadorForm.genero = 0;
+        else {
+          this.utilizadorForm.genero = this.utilizador.genero;
+        }
+
+        this.utilizadorForm.dataNascimento = moment(this.utilizadorForm.dataNascimento).format('YYYY-MM-DD');
+
+        this.utilizadorForm.email = this.utilizador.email;
+
+        Helper.limparObj(this.utilizadorForm);
+
+        this.$Progress.start();
+
+        this.$http.put(this.urlUtilizador, this.utilizadorForm).then(
+          resposta => {
+            this.$Progress.finish();
+            this.$message({
+              message: 'Perfil atualizado',
+              type: 'success'
+            });
+            return resposta.json();
+
+          }, resposta => {
+
+            this.$Progress.fail();
+            return resposta.json();
+
+          }).then(data => {
+
+        })
+
+        this.requestAtivo = false;
+
       },
       getDados(){
         this.$http.get(this.urlUtilizador).then(resposta => {
@@ -151,7 +231,6 @@
         })
       },
       setDados(){
-        console.log(this.utilizador);
         this.utilizadorForm.nome = this.utilizador.nome ? this.utilizador.nome : '';
         this.utilizadorForm.apelido = this.utilizador.apelido ? this.utilizador.apelido : '';
         this.utilizadorForm.genero = this.utilizador.genero ? this.generoComputed : '';
@@ -178,12 +257,18 @@
         } else if (this.utilizador.genero === "0") {
           return 'Feminino';
         }
+      },
+      generoUncomputed(){
+        if (this.utilizadorForm.genero === 'Masculino') {
+          return 1;
+        } else if (this.utilizadorForm.genero === "Feminino") {
+          return 0;
+        }
       }
     },
     watch: {
       getConcluido(){
         if (this.getConcluido === false) {
-          console.log('get concluido');
           this.urlUtilizador = `utilizadores/${this.idUtilizador}`;
           this.getDados();
           this.ajaxFeito = true;
@@ -277,6 +362,13 @@
 
     &--loading {
       min-height: 20vh;
+
+    }
+
+    &--right {
+      .el-tabs__nav {
+        float: left;
+      }
     }
 
   }

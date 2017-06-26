@@ -15,13 +15,16 @@ import PageNotFound from './containers/PageNotFound.vue';
 * ...
 * */
 export const routes = [
+
+  {path: '/home/:query', name:'home', component: Home,props:true},
   {path: '/', component: Home},
-  {path: '/evento', component: Home},
   {path: '/evento/:id', component: Evento, props: true},
-  {path: '/login', component: Login},
-  {path: '/register', component: Register},
   {path: '/perfil', component: Perfil},
   {path: '*', component: PageNotFound}
+];
+
+export const protectedRoutes = [
+  '/perfil'
 ];
 
 

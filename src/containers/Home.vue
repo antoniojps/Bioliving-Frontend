@@ -124,7 +124,6 @@
     },
 
     methods: {
-
       searchEventos: lodashDebounce(function () {
         // Pesquisa
         if (this.ajaxFeito) {

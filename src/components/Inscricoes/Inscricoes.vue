@@ -5,10 +5,10 @@
   >
     <transition-group name="el-fade-in-linear" v-if="dados && !erro && !semResultados">
       <div v-for="data in dados" :key="data.eventos_id_eventos">
-        <events-certificado
+        <events-inscricao
           :evento="data"
           :idUtilizador="idUtilizador"
-        ></events-certificado>
+        ></events-inscricao>
       </div>
     </transition-group>
 
@@ -23,7 +23,7 @@
     </div>
 
     <div class="data--erro align-center" v-if="semResultados">
-      <h3><i class="fa fa-sad" aria-hidden="true"></i> Sem certificados? Inscreva-se num evento!</h3>
+      <h3><i class="fa fa-sad" aria-hidden="true"></i> Sem inscrições? Inscreva-se num evento!</h3>
       <router-link to="../">
         <el-button type="primary" size="mini">Pesquisar eventos</el-button>
       </router-link>
@@ -33,14 +33,14 @@
 </template>
 
 <script>
-  import Certificado from './Certificado.vue';
+  import Inscricao from './Inscricao.vue';
   import {mapGetters} from 'vuex';
 
   export default {
 
 
     components: {
-      'events-certificado': Certificado
+      'events-inscricao': Inscricao
     },
 
 
@@ -64,7 +64,7 @@
     methods: {
 
       getData(){
-        this.$http.get(`utilizador/${this.idUtilizador}/certificado?results=4`).then(resposta => {
+        this.$http.get(`utilizadores/${this.idUtilizador}/inscritos?results=4`).then(resposta => {
           // 200 OK
           return resposta.json()
         }, resposta => {
@@ -120,8 +120,6 @@
         'auth'
       ])
     }
-
-
   }
 </script>
 

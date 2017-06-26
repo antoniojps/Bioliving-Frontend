@@ -4,9 +4,9 @@
 
   <div class="nav">
     <router-link to="/">
-    <div class="nav__brand" @click="redirectHome">
-      <div class="nav__brand--logo"></div>
-    </div>
+      <div class="nav__brand" @click="redirectHome">
+        <div class="nav__brand--logo"></div>
+      </div>
     </router-link>
     <!-- Mobile nav -->
     <div class="nav__right nav__right--mobile mobile">
@@ -14,7 +14,7 @@
       </div>
       <div class="nav__right--links">
         <i class="fa fa-search size-lg paddingLarge" aria-hidden="true"></i>
-        <i class="fa fa-user size-lg paddingLarge" aria-hidden="true" @click="dialogVisible = true"></i>
+        <i class="fa fa-user size-lg paddingLarge" aria-hidden="true" @click="dialogVisibleProp = true"></i>
       </div>
     </div>
     <!-- Desktop nav -->
@@ -30,21 +30,17 @@
               <router-link to="../perfil" class="nav__user--link">
                 <li><i class="fa fa-user-o"></i> Meu perfil</li>
               </router-link>
-              <router-link to="../interesses" class="nav__user--link">
-                <li><i class="fa fa-heart-o"></i> Interesses</li>
-              </router-link>
-              <router-link to="../certificados" class="nav__user--link">
-                <li><i class="fa fa-heart-o"></i> Certificados</li>
-              </router-link>
               <router-link to="../ajuda" class="nav__user--link">
                 <li><i class="fa fa-info"></i> Ajuda</li>
               </router-link>
-              <li><div style="width:100%; height:100%" @click="logout"><i class="fa fa-sign-out"></i> Sair</div></li>
+              <li>
+                <div style="width:100%; height:100%" @click="logout"><i class="fa fa-sign-out"></i> Sair</div>
+              </li>
             </ul>
           </el-popover>
 
-          <div class="nav__user--photo" v-popover:popover2>
-          </div>
+          <router-link to="/perfil"><div class="nav__user--photo" v-popover:popover2>
+          </div></router-link>
         </div>
 
         <el-tabs class="nav__tabs" v-model="nomeAtivo" @tab-click="handleClick">
@@ -56,7 +52,7 @@
     </div>
 
     <app-login-popup
-      :dialogOpen="dialogVisible"
+      :dialogOpen="dialogVisibleProp"
       :dialogType="dialogTypeProp"
       @dialogClose="dialogClosed"
       @dialogChange="dialogChanged"
@@ -80,13 +76,13 @@
   import LoginPopup from '../global/LoginPopup/LoginPopup.vue';
 
   export default {
+    props: ['dialogVisible'],
     components: {
       'app-event-search': EventSearch,
       'app-login-popup': LoginPopup
     },
     data() {
       return {
-        dialogVisible: false,
         dialogTypeProp: 'Entrar',
         nomeAtivo: '/'
       };
@@ -100,10 +96,13 @@
         }
         else if (this.nomeAtivo === 'login') {
           this.dialogTypeProp = 'Entrar';
-          this.dialogVisible = true;
+          this.dialogVisibleProp = true;
+          this.$router.push('/home/login');
+
         } else if (this.nomeAtivo === 'inscrever') {
           this.dialogTypeProp = 'Inscrever';
-          this.dialogVisible = true;
+          this.$router.push('/home/inscrever');
+          this.dialogVisibleProp = true;
         } else if (this.nomeAtivo === 'logout') {
           this.logout();
         }
@@ -118,7 +117,8 @@
       },
       // Eventos dialogClose e dialogChange
       dialogClosed(){
-        this.dialogVisible = !this.dialogVisible;
+        this.dialogVisibleProp = !this.dialogVisibleProp;
+        this.$router.push('/');
         this.nomeAtivo = '/';
       },
       dialogChanged(dados){
@@ -160,7 +160,10 @@
         'socioScope',
         'colaboradorScope',
         'adminScope'
-      ])
+      ]),
+      dialogVisibleProp(){
+          return this.dialogVisible;
+      }
     }
 
   }
@@ -185,15 +188,19 @@
         width: 40px;
         height: 40px;
         border-radius: 100%;
-        text-align:center;
-        padding-top:10px;
-        transform:translateY(10%);
-        cursor:pointer;
-        background-image:url(http://loremflickr.com/50/50);
+        text-align: center;
+        padding-top: 10px;
+        transform: translateY(10%);
+        cursor: pointer;
+        background-image: url(http://loremflickr.com/50/50);
         background-color: $colorBg;
-
-        border:$borderSize $colorBase7 solid;
-        margin-right:$sizeBase;
+        border: $borderSize $colorBase7 solid;
+        margin-right: $sizeBase;
+        transition: all 250ms ease-in;
+        &:hover{
+          opacity:0.8;
+          border:$borderSize*1.5 $colorVerde solid;
+        }
       }
       &--link {
         text-decoration: none;

@@ -1,4 +1,4 @@
-import { routes } from './router'
+import { routes,protectedRoutes } from './router'
 import ElementUi from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/pt';
 import VueProgressBar from 'vue-progressbar';
@@ -13,6 +13,7 @@ import VueResource from 'vue-resource'
 import App from './App.vue'
 
 import {store} from './store/store';
+
 import Autenticacao from './custom/autenticacao';
 
 // Dependencies vendor
@@ -47,10 +48,21 @@ const router = new VueRouter({
   routes
 })
 
+
 // Verificar scopes, se user esta loggado ou nao
 // Cometer na store
 router.beforeEach((to,from,next)=>{
-  Autenticacao.autenticar();
+  Autenticacao.autenticar().then(()=>{
+   if(protectedRoutes.includes(to.path)){
+     if(store.getters.auth){
+       next(to.path);
+     } else {
+       next('/home/login');
+     }
+   } else {
+      next();
+   }
+  })
   next();
 }).bind(Vue);
 

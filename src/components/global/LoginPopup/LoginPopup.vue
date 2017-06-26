@@ -4,6 +4,7 @@
     :visible.sync="dialogVisible"
     size="tiny"
     :before-close="handleClose"
+    v-if="!auth"
   >
         <span slot="footer" class="dialog-footer">
 
@@ -11,6 +12,7 @@
           <!-- login form -->
          <el-form :model="formLogin" ref="formLogin" :rules="rulesLogin" label-position="top"
                   v-if="dialogTypeProp==='Entrar'" @keyup.enter.native="submitForm('formLogin')">
+
     <el-form-item label="E-mail" :label-width="formLabelWidth" prop="email">
       <el-input v-model="formLogin.email" auto-complete="off"></el-input>
     </el-form-item>
@@ -88,6 +90,9 @@
         default: false
       },
       dialogType: {
+        type: String
+      },
+      query:{
         type: String
       }
     }
@@ -215,7 +220,9 @@
       },
 
       handleClose() {
+
         this.$emit('dialogClose');
+        this.$router.push({ path: '/' })
       },
       // todo vue-resource send authorization request, obter JWT, verificar JWT e guardar na localstorage
       loginHandler(){
@@ -290,42 +297,6 @@
 
   .el-form--label-top .el-form-item__label {
     float: left;
-  }
-
-  .el-dialog__wrapper {
-    min-width: $minWidth;
-  }
-
-  .el-dialog--tiny {
-    width: 90%;
-
-    @include screen(md) {
-      width: 50%;
-    }
-    @include screen(lg) {
-      width: 50%;
-    }
-    @include screen(xl) {
-      width: 30%;
-    }
-  }
-
-  .el-form-item.is-required .el-form-item__label::before {
-    content: "*";
-    color: $colorVerde;
-    margin-right: 4px;
-  }
-
-  .el-message__group {
-    margin-left: 38px;
-    position: relative;
-    height: 20px;
-    line-height: 20px;
-    display: -ms-flexbox;
-    display: flex;
-    padding-top: 10px;
-    -ms-flex-align: center;
-    align-items: center;
   }
 
   .pic-upload{

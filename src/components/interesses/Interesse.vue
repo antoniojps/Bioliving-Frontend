@@ -66,7 +66,7 @@
     &--rgt{
       width:90%;
     }
-    .coracaoVermelho {
+    i {
       color:$colorVermelho;
       padding:$spacingBase;
       cursor:pointer;
