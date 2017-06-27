@@ -5,6 +5,9 @@ import VueProgressBar from 'vue-progressbar';
 import SocialSharing from 'vue-social-sharing';
 import * as VueGoogleMaps from 'vue2-google-maps';
 import infiniteScroll from 'vue-infinite-scroll'
+import Chartkick from 'chartkick'
+import VueChartkick from 'vue-chartkick'
+import Chart from 'chartjs'
 
 import Vue from 'vue'
 window.Vue = Vue
@@ -26,6 +29,7 @@ Vue.use(VueProgressBar, {
 });
 Vue.use(SocialSharing);
 Vue.use(infiniteScroll);
+Vue.use(VueChartkick, { Chartkick });
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -34,7 +38,7 @@ Vue.use(VueGoogleMaps, {
 });
 
 // Http
-Vue.http.options.root = 'http://slimapp/api';
+Vue.http.options.root = 'http://46.101.56.18/api/v1';
 Vue.http.options.headers = 'Content-type: application/json';
 
 Vue.http.interceptors.push((request, next) => {
@@ -57,7 +61,7 @@ router.beforeEach((to,from,next)=>{
      if(store.getters.auth){
        next(to.path);
      } else {
-       next('/home/login');
+       next('/');
      }
    } else {
       next();

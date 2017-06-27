@@ -252,7 +252,7 @@
               this.$Progress.finish();
               this.loggingIn = false;
               Autenticacao.autenticar();
-              this.$emit('dialogClose');
+              this.handleClose();
               this.loginSucedido = true;
               return resposta.json();
 
@@ -282,13 +282,47 @@
           })
           // Vuex Mutation state de acordo com resposta
         }
-        // todo vue-resource para registrar, obter JWT, verificar JWT e guardar na localstorage
         else if (this.dialogTypeProp === 'Inscrever') {
-          // LOGIN HANDLER
-          // Enviar INSERT e Authorization request
+          // Enviar authorization request
+          this.$http.post('create', {
+            email: this.formRegister.emailRegistro,
+            password: this.formRegister.passwordRegistro,
+            apelido: this.formRegister.apelido,
+            nome: this.formRegister.nome
+          }).then(
+            resposta => {
+              // Login bem sucedido
+              this.$Progress.finish();
+              this.loggingIn = false;
+              Autenticacao.autenticar();
+              this.handleClose();
+              this.loginSucedido = true;
+              return resposta.json();
 
-          // Guardar WST
-          // Mostrar componentes de loggado
+            }, resposta => {
+
+              // Login falhado
+
+              this.loginSucedido = false;
+              this.$Progress.fail();
+              this.loggingIn = false;
+              return resposta.json();
+
+            }).then((data) => {
+
+            // Mostrar erro
+            if (!this.loginSucedido) {
+              this.$message({
+                message: data.info,
+                type: 'warning'
+              });
+            } else {
+              this.$message({
+                message: 'Bem-vindo!',
+                type: 'success'
+              });
+            }
+          })
         }
       },
 

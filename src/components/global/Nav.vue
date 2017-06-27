@@ -21,7 +21,7 @@
       <div class="nav__right--links">
 
         <div class="nav__user" v-if="auth">
-          <el-popover ref="popover2" placement="bottom" width="200" trigger="click">
+          <el-popover ref="popover2" placement="bottom" width="200" trigger="hover">
             <ul class="nav__user--ul">
               <router-link to="../perfil" class="nav__user--link">
                 <li><i class="fa fa-user-o"></i> Meu perfil</li>
@@ -41,6 +41,8 @@
 
         <el-tabs class="nav__tabs" v-model="nomeAtivo" @tab-click="handleClick">
           <el-tab-pane label="Eventos da Bioliving" name="/"></el-tab-pane>
+          <el-tab-pane label="Criar Evento" name="criarEvento" v-if="colaboradorScope"></el-tab-pane>
+          <el-tab-pane label="Gestão" name="gestao" v-if="adminScope"></el-tab-pane>
           <el-tab-pane label="Entrar" name="login" v-if="!auth"></el-tab-pane>
           <el-tab-pane label="Inscrever" name="inscrever" v-if="!auth"></el-tab-pane>
         </el-tabs>
@@ -92,8 +94,8 @@
         }
         else if (this.nomeAtivo === 'login') {
           this.dialogTypeProp = 'Entrar';
-          this.dialogVisibleProp = true;
           this.$router.push('/home/login');
+          this.dialogVisibleProp = true;
 
         } else if (this.nomeAtivo === 'inscrever') {
           this.dialogTypeProp = 'Inscrever';
@@ -101,6 +103,10 @@
           this.dialogVisibleProp = true;
         } else if (this.nomeAtivo === 'logout') {
           this.logout();
+        } else if(this.nomeAtivo==='criarEvento'){
+          this.$router.push('/criar-evento');
+        } else if(this.nomeAtivo==='gestao'){
+          this.$router.push('/gestao');
         }
       },
       redirectHome(){
@@ -129,10 +135,7 @@
           return Autenticacao.autenticar();
         }).then(response => {
           this.$Progress.finish();
-          this.$message({
-            message: 'Até à próxima!',
-            type: 'success'
-          });
+          location.href = '/';
         })
       }
     },

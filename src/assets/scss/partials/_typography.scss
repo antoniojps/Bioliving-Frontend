@@ -78,7 +78,7 @@ h4 {
 }
 
 .align-center {
-  text-align:left;
+  text-align:center;
 }
 
 .faded {
@@ -87,4 +87,8 @@ h4 {
 
 .grey {
   color:$colorBase2;
+}
+
+.active {
+  color:$colorVerde;
 }

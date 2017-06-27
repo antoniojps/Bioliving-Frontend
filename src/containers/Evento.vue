@@ -73,7 +73,7 @@
                   element-loading-text="A carregar...">
             <div>
               <!-- loading botao -->
-              <el-button type="primary" size="large" class="expandir" v-if="!evento.data">
+              <el-button type="primary" size="large" class="btn--expandir" v-if="!evento.data">
                 Inscrever
                 <i class="fa fa-pencil" aria-hidden="true"></i>
               </el-button>
@@ -83,14 +83,14 @@
               <div v-else>
 
                 <!-- evento passado -->
-                <el-button type="primary" size="large" class="expandir" disabled v-if="passado && !inscricaoFeita">
+                <el-button type="primary" size="large" class="btn--expandir" disabled v-if="passado && !inscricaoFeita">
                   Inscrições fechadas
                   <i class="fa fa-lock" aria-hidden="true"></i>
                 </el-button>
 
                 <!-- evento futuro -->
                 <!-- Sem inscricao -->
-                <el-button type="primary" size="large" class="expandir" @click="inscricaoToggle"
+                <el-button type="primary" size="large" class="btn--expandir" @click="inscricaoToggle"
                            v-if="!passado && !inscricaoFeita">
                   Inscrever
                   <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -99,7 +99,7 @@
 
                 <!-- Inscrito -->
                 <div v-if="inscricaoFeita" class="inscrito">
-                  <el-button type="info" size="large" class="expandir" @click="inscritoToggle">
+                  <el-button type="info" size="large" class="btn--expandir" @click="inscritoToggle">
                     Inscrito
                     <i class="fa fa-check" aria-hidden="true"></i>
                   </el-button>
@@ -524,6 +524,11 @@
     background: #fff;
     border-color: $colorBase5;
     color: $colorBase5;
+  }
+
+  .btn--expandir{
+    width:100%;
+
   }
 
   .btn--love {

@@ -54,13 +54,13 @@
               </el-tooltip>
             </div>
             <div class="sugestoes__down--rht">
-              <el-tooltip content="Inscrever" placement="top">
+              <el-tooltip content="Inscrições abertas" placement="top">
 
                 <el-button :plain="true" :disabled="true" class="btn--primary" size="small" v-if="passado"
                            title="Inscrições fechadas">
                   <i class="fa fa-plus" aria-hidden="true"></i>
                 </el-button>
-                <el-button type="primary" class="btn--primary" size="small" title="inscrever" @click="clicarInscrever"
+                <el-button type="primary" class="btn--primary" size="small" @click="clicarEvento"
                            v-else>
                   <i class="fa fa-plus" aria-hidden="true"></i>
                 </el-button>

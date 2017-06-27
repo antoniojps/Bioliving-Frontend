@@ -45,7 +45,6 @@
       postLocal(){
         if (this.inputFeito) {
           this.$Progress.start();
-          console.log('post');
           this.$http.post('locais', {nomeLocal: this.nomeLocal, lat: this.lat, lng: this.lng}).then(
             resposta => {
               this.$Progress.finish();
